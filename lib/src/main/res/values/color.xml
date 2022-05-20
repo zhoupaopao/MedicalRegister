@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="login_line">#A0B5D0</color>
+    <color name="text_color">#C96800</color>
+    <color name="bg_main">#FF8400</color>
+    <color name="edit_bg">#F4F6F8</color>
+
+
+    <color name="text_black">#3f3f3f</color>
+    <color name="text_orange">#fa622a</color>
+    <color name="text_gray">#999999</color>
+    <color name="white">#fff</color>
+    <color name="edit_hint">#798695</color>
+    <color name="drakBlack">#606266</color>
+    <color name="status_bar_color">#3080D1</color>
+    <color name="drakWhite">#DCDFE6</color>
+    <color name="blue">#157DFB</color>
+    <color name="gray333">#333333</color>
+    <color name="gray">#808080</color>
+    <color name="text_border_normal">#E5E5E5</color>
+    <color name="text_border_focused">#FDB890</color>
+    <color name="color_yzm_line">#B0B2B8</color>
+    <color name="color_radio">#dcdcdc</color>
+
+    <color name="footer_checked">#0F4C81</color>
+    <color name="footer_unchecked">#888888</color>
+    <color name="fragment_bg">#EEF4F5</color>
+    <color name="title_color">#3B4141</color>
+    <color name="line_color">#E0E0E0</color>
+    <color name="bg_001529">#001529</color>
+    <color name="bg_00519D">#00519D</color>
+</resources>

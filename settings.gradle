@@ -1,0 +1,4 @@
+include ':network_api'
+include ':lib'
+include ':app'
+rootProject.name = "MedicalRegister"

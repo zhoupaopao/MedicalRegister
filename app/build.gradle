@@ -1,0 +1,140 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    compileSdkVersion build_versions.compileSdk
+    buildToolsVersion build_versions.buildTools
+
+    defaultConfig {
+        applicationId "com.example.medicalregister"
+        minSdkVersion build_versions.minSdk
+        targetSdkVersion build_versions.targetSdk
+        versionCode app_version.versionCode
+        versionName app_version.versionName
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
+        packagingOptions {
+            //解决编译时com.android.builder.merge.DuplicateRelativeFileException: More than one file was found with OS independent path 'META-INF/rxjava.properties'这个错误
+            exclude 'META-INF/rxjava.properties'
+        }
+        multiDexEnabled true
+        ndk {
+            // 设置支持的SO库架构
+
+//            abiFilters "armeabi", "armeabi-v7a", "x86", "mips"
+            abiFilters 'armeabi', 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'
+        }
+    }
+    sourceSets {
+        main {
+            jniLibs.srcDir 'libs'
+        }
+
+        // Move the tests to tests/java, tests/res, etc...
+        androidTest.setRoot('tests')
+
+        // Move the build types to build-types/<type>
+        // For instance, build-types/debug/java, build-types/debug/AndroidManifest.xml, ...
+        // This moves them out of them default location under src/<type>/... which would
+        // conflict with src/ being used by the main source set.
+        // Adding new build types or product flavors should be accompanied
+        // by a similar customization.
+        debug.setRoot('build-types/debug')
+        release.setRoot('build-types/release')
+    }
+    signingConfigs {
+        release {
+            storeFile file("key.jks")
+            storePassword "123456"
+            keyAlias "key0"
+            keyPassword "123456"
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    dataBinding {
+        enabled true
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+//    packagingOptions {
+//        exclude 'META-INF/DEPENDENCIES'
+//        exclude 'META-INF/NOTICE'
+//        exclude 'META-INF/LICENSE'
+//        exclude 'META-INF/LICENSE.txt'
+//        exclude 'META-INF/NOTICE.txt'
+//    }
+    lintOptions {
+        abortOnError false
+        warning 'InvalidPackage'
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation deps.appcompat
+    implementation deps.material
+    implementation project(path: ':network_api')
+    implementation files('libs/IGLBarDecoder.jar')
+    implementation files('libs/cw-deviceapi20180628.jar')
+    implementation files('libs\\BarcodeAPI_V1_1_33.jar')
+    implementation files('libs\\lunar-1.2.21.jar')
+    androidTestImplementation deps.test.espresso
+    implementation deps.constraintlayout
+//    testImplementation 'junit:junit:4.+'
+    testImplementation deps.test.junit
+
+    implementation deps.arouter.arouter_api
+    annotationProcessor deps.arouter.arouter_compiler
+    implementation project(':lib')
+//    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation  deps.refresh.layoutKernel      //核心必须依赖
+    implementation  deps.refresh.headerClassics    //经典刷新头
+    implementation  deps.refresh.footerBall        //球脉冲加载
+    implementation  deps.refresh.footerClassics    //经典加载
+
+    implementation deps.cardview
+
+    implementation deps.retrofit.okhttp3
+    implementation deps.retrofit.converter_gson
+    implementation deps.retrofit.retrofit_adapter
+    implementation deps.rxjava2adapter
+    //引入rxandroid
+    implementation deps.reactivex.rxandroid
+    implementation deps.reactivex.rxjavaandroid
+
+    implementation deps.refresh.layoutKernel
+    implementation deps.refresh.headerClassics
+    implementation deps.refresh.footerBall
+    implementation deps.refresh.footerClassics
+    implementation deps.refresh.headerMaterial
+    implementation deps.SwipeDelMenuLayout
+    implementation deps.BaseRecyclerViewAdapterHelper
+    implementation deps.eventbus
+    implementation deps.MultilevelTreeList
+    implementation deps.mqtt
+    implementation deps.mqttService
+    implementation deps.progressview
+    implementation deps.jodaTime
+    implementation deps.immersionbar
+
+    implementation 'com.dou361.dialogui:jjdxm-dialogui:1.0.3'
+    api 'com.qw:soulpermission:1.2.2'
+    implementation 'com.github.SheHuan:NiceDialog:1.2.0'
+    implementation files('../aar/autoreplyprint.aar')
+
+//    implementation 'org.apache.logging.log4j:log4j-api:2.14.0'
+//    implementation 'org.apache.logging.log4j:log4j-core:2.14.0'
+}

@@ -1,0 +1,17 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.YaoBai" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <!-- AppCompatEditText默认状态状态设置底线颜色 -->
+        <!--        <item name="colorControlNormal">#xxxx</item>-->
+        <!-- AppCompatEditText选择的底线颜色 -->
+        <item name="colorControlActivated">@color/blue</item>
+
+<!--        隐藏状态栏-->
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <!-- Customize your theme here. -->
+    </style>
+</resources>

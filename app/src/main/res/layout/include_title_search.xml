@@ -1,0 +1,67 @@
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
+        android:background="@color/main_color"
+        android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/llBack"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:gravity="center">
+
+                <ImageButton
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@mipmap/icon_back_white"
+                    android:scaleType="fitXY"
+                    android:shadowColor="@null" />
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_white_shape_order_detail">
+                <EditText
+                    android:id="@+id/etTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerVertical="true"
+                    android:background="@null"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="16dp"
+                    android:hint="请输入物料名称或库位号"
+                    android:imeActionLabel="搜索"
+                    android:imeOptions="actionSearch"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:textColor="@color/gray333"
+                    android:textSize="12sp" />
+                <ImageView
+                    android:id="@+id/iv_clean"
+                    android:layout_width="26dp"
+                    android:layout_height="26dp"
+                    android:padding="5dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="5dp"
+                    android:src="@mipmap/cancel_gray_icon" />
+            </RelativeLayout>
+            <ImageView
+                android:id="@+id/iv_search"
+                android:layout_width="34dp"
+                android:layout_height="34dp"
+                android:src="@mipmap/search_white"
+                android:padding="6dp"
+                android:layout_margin="5dp"/>
+
+
+    </LinearLayout>
+
+
+</merge>

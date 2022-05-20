@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.medicalregister.viewmodel.BlueToothListViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@mipmap/bg_enter">
+
+        <com.example.medicalregister.widget.TitleLayoutTmView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tltv_name="蓝牙" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="蓝牙设备"
+            android:textColor="@color/white"
+            android:textSize="22sp"
+            android:layout_marginLeft="100dp"
+            android:layout_marginTop="40dp" />
+
+<!--        <RelativeLayout-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_marginTop="20dp"-->
+<!--            android:layout_marginLeft="93dp"-->
+<!--            android:layout_marginRight="93dp"-->
+<!--            android:layout_marginBottom="70dp"-->
+<!--            android:background="@drawable/bg_42006fd6_corner7">-->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="93dp"
+                android:layout_marginRight="93dp"
+                android:layout_marginBottom="70dp"
+                app:cardCornerRadius="7dp"
+                app:cardElevation="0dp"
+                app:cardBackgroundColor="@color/color_42006FD6"
+                >
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+            </androidx.cardview.widget.CardView>
+<!--        </RelativeLayout>-->
+
+    </LinearLayout>
+</layout>

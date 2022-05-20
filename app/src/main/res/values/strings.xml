@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">医废登记</string>
+    <string name="page_uppage">上一页</string>
+    <string name="page_downpage">下一页</string>
+</resources>

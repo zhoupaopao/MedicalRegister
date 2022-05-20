@@ -1,0 +1,70 @@
+plugins {
+    id 'com.android.library'
+}
+
+android {
+    compileSdkVersion build_versions.compileSdk
+    buildToolsVersion build_versions.buildTools
+
+    defaultConfig {
+        minSdkVersion build_versions.minSdk
+        targetSdkVersion build_versions.targetSdk
+        versionCode app_version.versionCode
+        versionName app_version.versionName
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
+        packagingOptions {
+            //解决编译时com.android.builder.merge.DuplicateRelativeFileException: More than one file was found with OS independent path 'META-INF/rxjava.properties'这个错误
+            exclude 'META-INF/rxjava.properties'
+        }
+        multiDexEnabled true
+        ndk {
+            // 设置支持的SO库架构
+
+            abiFilters "armeabi", "armeabi-v7a", "x86", "mips"
+        }
+
+        buildTypes {
+            release {
+                minifyEnabled false
+                proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            }
+        }
+        dataBinding {
+            enabled true
+        }
+        compileOptions {
+            sourceCompatibility JavaVersion.VERSION_1_8
+            targetCompatibility JavaVersion.VERSION_1_8
+        }
+        lintOptions {
+            abortOnError false
+            warning 'InvalidPackage'
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation deps.soulpermission
+    implementation deps.retrofit.retrofit
+    implementation deps.retrofit.converter_gson
+    implementation deps.retrofit.retrofit_adapter
+    implementation deps.retrofit.okhttp3
+    implementation deps.retrofit.gson
+    implementation deps.guava
+    implementation deps.interceptor
+    //引入rxjava适配器，方便rxjava与retrofit的结合
+    implementation deps.arouter.arouter_api
+    implementation deps.multidex
+    implementation project(path: ':lib')
+    annotationProcessor deps.arouter.arouter_compiler
+    implementation deps.rxjava2adapter
+    //引入rxandroid
+    implementation deps.reactivex.rxandroid
+    implementation deps.reactivex.rxjavaandroid
+}

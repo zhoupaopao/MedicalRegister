@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration status="debug" >
+    <appenders>
+        <!--这个输出控制台的配置-->
+        <console name="Stdout" target="SYSTEM_OUT">
+            <!--输出日志的格式-->
+            <ThresholdFilter level="trace" onMatch="ACCEPT" onMismatch="NEUTRAL"/>
+            <PatternLayout pattern="%d  [%t] %-5level: %msg%n%throwable"/>
+        </console>
+        <RollingFile name="rolling" fileName="mnt/sdcard/rolling.log"
+            filePattern="mnt/sdcard/rolling-%d{yyyy-MM-dd}-%i.txt" >
+            <MarkerFilter marker="NAME" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="[%d{yyyy-MM-dd HH:mm:ss}] [%c{1}-%p %l] %m%n"/>
+            <Policies>
+                <!-- 基于指定文件大小的滚动策略,设置日志文件满1MB后打包,,size属性用来定义每个日志文件的大小 -->
+                <SizeBasedTriggeringPolicy size="1M"/>
+            </Policies>
+            <!-- DefaultRolloverStrategy属性如不设置，默认最多7个文件，这里设置20 -->
+            <DefaultRolloverStrategy max="20"/>
+        </RollingFile>
+
+    </appenders>
+
+
+    <loggers>
+        <!--记录执行的HQL语句 -->
+        <!-- additivity="false"是为了避免日志在root里再次输出 -->
+        <Logger name="TestLogger" level="debugr" additivity="false">
+            <AppenderRef ref="rolling" />
+        </Logger>
+        <root level="debug">
+            <AppenderRef ref="rolling"/>
+        </root>
+    </loggers>
+</configuration>

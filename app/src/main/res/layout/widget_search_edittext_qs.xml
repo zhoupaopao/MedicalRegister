@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:background="@color/white"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="36dp"
+        android:layout_weight="1"
+        android:gravity="center_vertical"
+        android:background="@drawable/bg_f7f8fa_corner18"
+        android:paddingLeft="14dp"
+        android:paddingRight="4dp"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:orientation="horizontal">
+        <ImageView
+            android:layout_width="13dp"
+            android:layout_height="13dp"
+            android:src="@mipmap/icon_search"
+            />
+        <EditText
+            android:id="@+id/et_search"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:imeActionLabel="搜索"
+            android:imeOptions="actionSearch"
+            android:inputType="text"
+            android:maxLines="1"
+            android:gravity="center"
+            android:textSize="14sp"
+            android:textColorHint="@color/color_C8C9CA"
+            android:background="@null"
+            android:layout_marginLeft="5dp"/>
+        <ImageView
+            android:id="@+id/iv_cancel"
+            android:layout_width="23dp"
+            android:layout_height="23dp"
+            android:padding="5dp"
+            android:src="@mipmap/cancel_gray_icon"
+            />
+    </LinearLayout>
+    <TextView
+        android:id="@+id/tv_search"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="搜索"
+        android:layout_marginLeft="8dp"
+        android:textColor="@color/gray333"
+        android:textSize="16sp"/>
+
+
+
+</LinearLayout>

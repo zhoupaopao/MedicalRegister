@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/ll_item"
+    android:layout_width="match_parent"
+    android:layout_height="160dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_margin="10dp"
+    android:padding="10dp"
+    android:background="@drawable/bg_white_corner5"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <com.example.medicalregister.widget.WidgetTextMsg
+        android:id="@+id/wtm_order_number"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        app:wtm_right="123123123"
+        app:wtm_left="订单号："/>
+    <com.example.medicalregister.widget.WidgetTextMsg
+        android:id="@+id/wtm_item_name"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        app:wtm_right="123123123"
+        app:wtm_left="产品名称："/>
+    <com.example.medicalregister.widget.WidgetTextMsg
+        android:id="@+id/wtm_item_number"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        app:wtm_right=""
+        app:wtm_left="产品编号："/>
+    <com.example.medicalregister.widget.WidgetTextMsg
+        android:id="@+id/wtm_num_pencent"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        app:wtm_right="0/500"
+        app:wtm_left="数量："/>
+    <com.example.medicalregister.widget.WidgetTextMsg
+        android:id="@+id/wtm_status"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        app:wtm_right="齐套"
+        app:wtm_left="状态："/>
+</LinearLayout>

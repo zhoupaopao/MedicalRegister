@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/ll_bg"
+    android:background="#ba000000"
+    android:orientation="horizontal"
+    android:paddingRight="40dp"
+    android:paddingLeft="40dp"
+    android:gravity="center"
+    >
+
+    <LinearLayout
+        android:id="@+id/ll_inner_bg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/bg_white_yj"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="29dp"
+            android:paddingBottom="24dp"
+            android:paddingLeft="10dp"
+            android:orientation="vertical"
+            android:paddingRight="10dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="删除后无法恢复"
+            android:textSize="14dp"
+            android:id="@+id/tv_first"
+            android:gravity="center"
+            android:textColor="@color/gray333"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="是否取消"
+                android:textSize="14dp"
+                android:id="@+id/tv_second"
+                android:visibility="gone"
+                android:gravity="center"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/gray333"/>
+    </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="#e9e9e9"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            >
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="取消"
+                android:textSize="16dp"
+                android:textColor="@color/text_888888"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:gravity="center"
+                android:background="@drawable/bg_right_line_f4f4f4"
+                android:id="@+id/txt_cancel"/>
+
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="确认"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:textColor="@color/main_color"
+                android:textSize="16dp"
+                android:gravity="center"
+                android:id="@+id/txt_sure"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>

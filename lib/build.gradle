@@ -1,0 +1,74 @@
+plugins {
+    id 'com.android.library'
+}
+
+android {
+    compileSdkVersion build_versions.compileSdk
+    buildToolsVersion build_versions.buildTools
+
+    defaultConfig {
+        minSdkVersion build_versions.minSdk
+        targetSdkVersion build_versions.targetSdk
+        versionCode app_version.versionCode
+        versionName app_version.versionName
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
+        packagingOptions {
+            //解决编译时com.android.builder.merge.DuplicateRelativeFileException: More than one file was found with OS independent path 'META-INF/rxjava.properties'这个错误
+            exclude 'META-INF/rxjava.properties'
+        }
+        multiDexEnabled true
+        ndk {
+            // 设置支持的SO库架构
+
+            abiFilters 'armeabi', 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'
+        }
+
+        buildTypes {
+            release {
+                minifyEnabled false
+                proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            }
+        }
+        dataBinding {
+            enabled true
+        }
+        compileOptions {
+            sourceCompatibility JavaVersion.VERSION_1_8
+            targetCompatibility JavaVersion.VERSION_1_8
+        }
+        lintOptions {
+            abortOnError false
+            warning 'InvalidPackage'
+        }
+    }
+}
+
+    dependencies {
+
+        implementation fileTree(include: ['*.jar'], dir: 'libs')
+        implementation deps.appcompat
+        implementation deps.material
+        androidTestImplementation deps.test.espresso
+        implementation deps.constraintlayout
+//    testImplementation 'junit:junit:4.+'
+        testImplementation deps.test.junit
+
+        implementation deps.arouter.arouter_api
+        implementation deps.multidex
+        annotationProcessor deps.arouter.arouter_compiler
+
+        implementation deps.retrofit.okhttp3
+        implementation deps.retrofit.converter_gson
+        implementation deps.retrofit.retrofit_adapter
+        implementation deps.immersionbar
+        implementation deps.eventbus
+
+
+        implementation(deps.journeyapps) { transitive = false }
+        implementation deps.zxingCore
+    }

@@ -1,0 +1,260 @@
+//App
+def app_version = [:]
+app_version.versionCode = 5
+app_version.versionName = "1.1.1"
+ext.app_version = app_version
+
+//build version
+def build_versions = [:]
+//build_versions.minSdk = 19
+build_versions.minSdk = 19
+build_versions.targetSdk = 30
+build_versions.compileSdk = 30
+build_versions.buildTools = "30.0.3"
+ext.build_versions = build_versions
+
+ext.deps = [:]
+
+// App dependencies
+def versions = [:]
+//support
+versions.material = "1.2.0-alpha01"
+versions.appcompat = "1.0.0+"
+versions.swiperefreshlayout = "1.1.0-alpha03"
+versions.recyclerview = "1.1.0-rc01"
+versions.constraintLayout = "1.1.3"
+
+//test
+versions.junit = "4.+"
+versions.test = "1.2.0"
+versions.runner = "1.2.0"
+versions.espresso = "3.2.0"
+//versions.appcompat="1.1.0"
+
+
+// Architecture Components dependencies
+versions.archLifecycle = "2.2.0"//2.2.0-rc01
+versions.room = "2.2.1"
+
+//dagger
+versions.dagger = "2.25.2"
+
+versions.retrofit = "2.6.2"
+versions.gson = "2.8.6"
+
+//jenly
+versions.base = "3.2.1-androidx"
+versions.appupdater = "1.0.5-androidx"
+versions.neverCrash = "1.0.0"
+
+versions.timber = "4.7.1"
+versions.logger = "2.2.0"
+
+versions.leakcanary = "1.6.3"
+
+versions.flowlayout = "1.1.2"
+
+versions.multidex = "2.0.1"
+
+versions.arouter_api = "1.5.0"
+
+versions.arouter_compiler = "1.2.2"
+
+versions.dialogui = "1.0.3"
+
+versions.pickerView = "4.1.9"
+
+versions.joda_time = "2.9.9"
+
+versions.rxandroid = "1.2.1"
+
+versions.zxing_core = "3.2.1"
+
+versions.smartRefresh="2.0.1"
+
+ext.deps = [:]
+
+deps.material = "com.google.android.material:material:$versions.material"
+
+deps.appcompat = "androidx.appcompat:appcompat:$versions.appcompat"
+
+deps.swiperefreshlayout = "androidx.swiperefreshlayout:swiperefreshlayout:$versions.swiperefreshlayout"
+
+deps.recyclerview = "androidx.recyclerview:recyclerview:$versions.recyclerview"
+
+deps.constraintlayout = "androidx.constraintlayout:constraintlayout:$versions.constraintLayout"
+
+deps.multidex = "androidx.multidex:multidex:$versions.multidex"
+
+
+//test
+def test = [:]
+test.junit = "junit:junit:$versions.junit"
+test.test = "androidx.test:core:$versions.test"
+test.runner = "androidx.test:runner:$versions.runner"
+test.espresso = "androidx.test.espresso:espresso-core:$versions.espresso"
+
+deps.test = test
+
+//lifecycle
+def lifecycle = [:]
+lifecycle.runtime = "androidx.lifecycle:lifecycle-runtime:$versions.archLifecycle"
+lifecycle.extensions = "androidx.lifecycle:lifecycle-extensions:$versions.archLifecycle"
+lifecycle.compiler = "androidx.lifecycle:lifecycle-compiler:$versions.archLifecycle"
+lifecycle.viewmodel_savedstate = "androidx.lifecycle:lifecycle-viewmodel-savedstate:$versions.archLifecycle"
+
+deps.lifecycle = lifecycle
+
+//room
+def room = [:]
+room.runtime = "androidx.room:room-runtime:$versions.room"
+room.compiler = "androidx.room:room-compiler:$versions.room"
+room.rxjava2 = "androidx.room:room-rxjava2:$versions.room"
+deps.room = room
+
+//dagger
+def dagger = [:]
+dagger.dagger = "com.google.dagger:dagger:$versions.dagger"
+dagger.android = "com.google.dagger:dagger-android:$versions.dagger"
+dagger.android_support = "com.google.dagger:dagger-android-support:$versions.dagger"
+dagger.android_processor = "com.google.dagger:dagger-android-processor:$versions.dagger"
+dagger.compiler = "com.google.dagger:dagger-compiler:$versions.dagger"
+deps.dagger = dagger
+
+//retrofit
+def retrofit = [:]
+retrofit.okhttp3 = "com.squareup.okhttp3:okhttp:$versions.retrofit"
+retrofit.retrofit_adapter = "com.squareup.retrofit2:adapter-rxjava:$versions.retrofit"
+retrofit.retrofit = "com.squareup.retrofit2:retrofit:$versions.retrofit"
+retrofit.gson = "com.google.code.gson:gson:$versions.gson"
+retrofit.converter_gson = "com.squareup.retrofit2:converter-gson:$versions.retrofit"
+deps.retrofit = retrofit
+
+def reactivex = [:]
+reactivex.rxandroid = "io.reactivex:rxandroid:$versions.rxandroid"
+reactivex.rxjavaandroid = "io.reactivex.rxjava2:rxandroid:2.0.2"
+deps.reactivex = reactivex
+
+//jenly1314
+def jenly = [:]
+jenly.base_adapter = "com.king.base:adapter:$versions.base"
+jenly.base_util = "com.king.base:util:$versions.base"
+jenly.app_updater = "com.king.app:app-updater:$versions.appupdater"
+jenly.app_dialog = "com.king.app:app-dialog:$versions.appupdater"
+jenly.nevercrash = "com.king.thread:nevercrash:$versions.neverCrash"
+deps.jenly = jenly
+
+//log
+deps.timber = "com.jakewharton.timber:timber:$versions.timber"
+
+deps.logger = "com.orhanobut:logger:$versions.logger"
+
+ext.deps = deps
+
+
+//arouter
+def arouter = [:]
+arouter.arouter_api = "com.alibaba:arouter-api:$versions.arouter_api"
+arouter.arouter_compiler = "com.alibaba:arouter-compiler:$versions.arouter_compiler"
+deps.arouter = arouter
+
+def zxing = [:]
+zxing.core = "com.google.zxing:core:$versions.zxing_core"
+deps.zxing = zxing
+
+def dialogui = [:]
+dialogui.jjdxm_dialogui = "com.dou361.dialogui:jjdxm-dialogui:$versions.dialogui"
+deps.dialogui = dialogui
+
+def pickerView = [:]
+pickerView.contrarywind_view = "com.contrarywind:Android-PickerView:$versions.pickerView"
+deps.pickerView = pickerView
+
+def joda_time = [:]
+joda_time.joda_time = "joda-time:joda-time:$versions.joda_time"
+deps.joda_time = joda_time
+
+deps.simple_xml = "org.simpleframework:simple-xml:2.7.1"
+
+deps.persistentCookieJar = "com.github.franmontiel:PersistentCookieJar:v1.0.1"
+//leakcanary
+def leakcanary = [:]
+leakcanary.debug = "com.squareup.leakcanary:leakcanary-android:$versions.leakcanary"
+leakcanary.release = "com.squareup.leakcanary:leakcanary-android-no-op:$versions.leakcanary"
+deps.leakcanary = leakcanary
+
+//flowlayout
+deps.flowlayout = "com.hyman:flowlayout-lib:$versions.flowlayout"
+
+deps.immersionbar = "com.gyf.immersionbar:immersionbar:3.0.0"
+
+deps.cardview = 'com.zyp.cardview:cardview:1.0.1'
+
+deps.BaseRecyclerViewAdapterHelper = 'com.github.CymChad:BaseRecyclerViewAdapterHelper:3.0.4'
+
+deps.dialogplus = 'com.orhanobut:dialogplus:1.11@aar'
+deps.utilcode= 'com.blankj:utilcode:1.30.6'
+
+// if u use AndroidX, use the following
+deps.utilcodex = 'com.blankj:utilcodex:1.30.6'
+deps.baseAdapter = 'com.zhy:base-adapter:3.0.3'
+
+deps.soulpermission='com.qw:soulpermission:1.2.2'
+
+deps.interceptor="com.squareup.okhttp3:logging-interceptor:3.8.1"
+
+deps.guava='com.google.guava:guava:23.3-android'
+
+deps.rxjava2='io.reactivex.rxjava2:rxjava:2.1.16'
+//
+deps.rxjava2adapter='com.jakewharton.retrofit:retrofit2-rxjava2-adapter:1.0.0'
+
+deps.loadsir='com.kingja.loadsir:loadsir:1.3.8'
+deps.progressview='com.white:progressview:1.0.1'
+
+deps.glide='com.github.bumptech.glide:glide:4.9.0'
+deps.glideCom='com.github.bumptech.glide:compiler:4.5.0'
+//Lottie是Airbnb开源的一个支持 Android、iOS 以及 ReactNative，利用json文件的方式快速实现动画效果的库
+deps.lottie='com.airbnb.android:lottie:2.8.0'
+deps.jodaTime='joda-time:joda-time:2.9.9'
+
+
+deps.eventbus='org.greenrobot:eventbus:3.0.0'
+
+deps.journeyapps='com.journeyapps:zxing-android-embedded:3.6.0'
+deps.zxingCore='com.google.zxing:core:3.3.0'
+
+deps.MultilevelTreeList='com.github.zhangke3016:MultilevelTreeList:1.0.2'
+deps.SwipeDelMenuLayout= 'com.github.mcxtzhang:SwipeDelMenuLayout:V1.3.0' //列表滑动
+
+deps.mqtt='org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.2.0'
+
+deps.mqttService='org.eclipse.paho:org.eclipse.paho.android.service:1.1.1'
+
+
+
+//room
+def refresh = [:]
+refresh.layoutKernel = "com.scwang.smart:refresh-layout-kernel:$versions.smartRefresh" //核心必须依赖
+refresh.headerClassics = "com.scwang.smart:refresh-header-classics:$versions.smartRefresh"//经典刷新头
+refresh.footerBall = "com.scwang.smart:refresh-footer-ball:$versions.smartRefresh"//球脉冲加载
+refresh.footerClassics = "com.scwang.smart:refresh-footer-classics:$versions.smartRefresh"//经典加载
+refresh.headerMaterial =  "com.scwang.smart:refresh-header-material:$versions.smartRefresh"    //谷歌刷新头
+deps.refresh = refresh
+
+
+
+
+ext.deps = deps
+
+def addRepos(RepositoryHandler handler) {
+    handler.google()
+    handler.jcenter()
+    handler.mavenCentral()
+    handler.maven { url "https://dl.bintray.com/jenly/maven" }
+    handler.maven { url "https://jitpack.io" }
+
+}
+
+ext.addRepos = this.&addRepos
+

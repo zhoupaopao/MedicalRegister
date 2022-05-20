@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--字体大小-->
+    <dimen name="text_size_large">25sp</dimen>
+    <dimen name="text_size_large_20">20sp</dimen>
+    <dimen name="text_size_common">15sp</dimen>
+    <dimen name="text_size_button">18sp</dimen>
+    <dimen name="text_size_small">12sp</dimen>
+
+    <dimen name="padding_10">10dp</dimen>
+    <dimen name="common_size">12px</dimen>
+    <dimen name="widget_scan_size">17px</dimen>
+    <dimen name="submit_size">18px</dimen>
+</resources>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.medicalregister.viewmodel.PrintLabelViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.example.medicalregister.widget.TitleLayoutView
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            app:tlv_name="标签打印" />
+
+        <com.example.medicalregister.widget.WidgetSubmitView
+            android:id="@+id/wsv_print"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            app:wsv_text="打印" />
+        <com.example.medicalregister.widget.WidgetSubmitView
+            android:id="@+id/wsv_jiaozhun"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            app:wsv_text="校准" />
+        <com.example.medicalregister.widget.WidgetSubmitView
+            android:id="@+id/wsv_toSi"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            app:wsv_text="进纸到撕纸位置" />
+        <com.example.medicalregister.widget.WidgetSubmitView
+            android:id="@+id/wsv_restart"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            app:wsv_text="重启安卓" />
+
+
+
+    </LinearLayout>
+</layout>

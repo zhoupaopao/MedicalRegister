@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/ll_bg"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ba000000"
+    android:orientation="vertical">
+
+    <View
+        android:id="@+id/view_out"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:id="@+id/ll_main"
+        android:layout_width="match_parent"
+        android:layout_height="360dp"
+        android:background="@color/white"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="添加入库明细"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:layout_marginLeft="15dp"
+            android:gravity="center_vertical"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            android:layout_weight="1">
+            <com.example.medicalregister.widget.WidgetTextScanView
+                android:id="@+id/wtsv_material_code"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                app:wtsv_left="物料码："
+                app:wtsv_right="请扫描物料码"/>
+            <com.example.medicalregister.widget.WidgetTextScanView
+                android:id="@+id/wtsv_floor_code"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                app:wtsv_left="地面码："
+                app:wtsv_right="请扫描地面码"/>
+            <com.example.medicalregister.widget.WidgetTextScanView
+                android:id="@+id/wtsv_shelf_code"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                app:wtsv_left="货架码："
+                app:wtsv_right="请扫描货架码"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal">
+            <com.example.medicalregister.widget.WidgetSubmitView
+                android:id="@+id/wsv_sure_close"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                app:wsv_text="确认并关闭"
+                />
+            <LinearLayout
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/main_color"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+                <View
+                    android:layout_width="1dp"
+                    android:layout_height="36dp"
+                    android:background="@color/white"/>
+            </LinearLayout>
+
+            <com.example.medicalregister.widget.WidgetSubmitView
+                android:id="@+id/wsv_sure_add"
+                android:layout_width="0dp"
+                android:layout_height="60dp"
+                android:layout_weight="1"
+                app:wsv_text="确认并继续添加"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

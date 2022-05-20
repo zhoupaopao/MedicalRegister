@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_width="100dp"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <ImageView
+        android:id="@+id/iv_delete"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="25dp"
+        android:src="@mipmap/icon_delete1"/>
+    <EditText
+        android:id="@+id/et_num"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="7dp"
+        android:layout_marginRight="7dp"
+        android:text="1"
+        android:inputType="number"
+        android:maxLines="1"
+        android:background="@null"
+        android:maxLength="3"
+        android:textStyle="bold"
+        android:textColor="@color/gray333"
+        android:textSize="16sp" />
+    <ImageView
+        android:id="@+id/iv_add"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="25dp"
+        android:src="@mipmap/icon_add1"/>
+</LinearLayout>

@@ -1,0 +1,220 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <!-- AppCompatEditText默认状态状态设置底线颜色 -->
+<!--        <item name="colorControlNormal">#xxxx</item>-->
+        <!-- AppCompatEditText选择的底线颜色 -->
+<!--        <item name="colorControlActivated">@color/blue</item>-->
+    </style>
+    <style name="MyCheckBox" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">@color/drakWhite</item>
+        <item name="colorControlActivated">@color/blue</item>
+    </style>
+    <style name="MyTabText" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">25sp</item>
+    </style>
+    <style name="CheckBoxZDY" parent="@android:style/Widget.CompoundButton.CheckBox">
+<!--        <item name="android:button">@drawable/checkbox_selector</item>-->
+        <item name="android:paddingLeft">10.0dp</item>
+        <item name="android:maxHeight">50dp</item>
+    </style>
+    <!-- 设置提示文字样式 -->
+    <style name="hintAppearance" parent="TextAppearance.AppCompat">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/blue</item>
+    </style>
+<!--    <style name="mainEdittext" parent="Theme.AppCompat.Light">-->
+<!--        <item name="android:colorControlActivated">@color/indigo</item>-->
+<!--        <item name="colorControlActivated">@color/pink</item>-->
+
+<!--    </style>-->
+
+
+    <!--搜索框-->
+    <declare-styleable name="WidgetSearchEditView">
+        <!--提示的文字-->
+        <attr name="wsev_hint" format="string" />
+        <!--文字大小-->
+        <attr name="wsev_textsize" format="dimension|reference" />
+    </declare-styleable>
+<!--搜索框-->
+    <declare-styleable name="WidgetQsSearchEditView">
+        <!--提示的文字-->
+        <attr name="wqsev_hint" format="string" />
+        <!--文字大小-->
+        <attr name="wqsev_textsize" format="dimension|reference" />
+    </declare-styleable>
+    <!-- 自定义标题组件-->
+    <declare-styleable name="CommonTitleView">
+        <!--标题的文字-->
+        <attr name="ctv_title" format="string" />
+        <!--箭头图标-->
+        <attr name="ctv_icon" format="reference"/>
+    </declare-styleable>
+    <!--    一行文字，两个textview组成，颜色不同-->
+    <declare-styleable name="WidgetTextLeftRight">
+        <attr name="wtlr_left" format="string" />
+        <attr name="wtlr_right" format="string" />
+        <attr name="wtlr_textsize" format="dimension|reference" />
+        <attr name="wtlr_right_color" format="color|reference" />
+        <attr name="wtlr_left_color" format="color|reference" />
+        <attr name="wtlr_bold" format="boolean" />
+        <attr name="wtlr_background" format="reference|color" />
+    </declare-styleable>
+    <declare-styleable name="WidgetTextScanView">
+        <attr name="wtsv_left" format="string"/>
+        <attr name="wtsv_right" format="string" />
+        <attr name="wtsv_textsize" format="dimension|reference" />
+        <attr name="wtsv_right_color" format="color|reference" />
+        <attr name="wtsv_left_color" format="color|reference" />
+        <attr name="wtsv_right_icon" format="integer|reference"/>
+    </declare-styleable>
+    <!-- 自定义验证码-->
+    <declare-styleable name="VerificationCodeView">
+        <!--输入框的数量-->
+        <attr name="vcv_code_number" format="integer" />
+        <!--单个验证码的宽度-->
+        <attr name="vcv_code_width" format="dimension|reference" />
+        <!--输入框文字颜色-->
+        <attr name="vcv_code_color" format="color|reference" />
+        <!--输入框文字大小-->
+        <attr name="vcv_code_size" format="dimension|reference" />
+        <!--输入框获取焦点时边框-->
+        <attr name="vcv_code_bg_focus" format="reference" />
+        <!--输入框没有焦点时边框-->
+        <attr name="vcv_code_bg_normal" format="reference" />
+        <!--是否展示密码样式-->
+        <attr name="vcv_code_input_style" format="boolean" />
+    </declare-styleable>
+    <!--    设置radiobutton图标大小-->
+    <declare-styleable name="MyRadioButton">
+        <attr name="drawableTop" format="reference" />
+    </declare-styleable>
+    <!--    一行信息，左侧文字，右侧有两个图标-->
+    <declare-styleable name="LineRightIconView">
+        <attr name="lriv_icon" format="reference" />
+        <attr name="lriv_name" format="string" />
+    </declare-styleable>
+    <declare-styleable name="PersonalTopView">
+        <attr name="ptv_header" format="reference" />
+        <attr name="ptv_name" format="string" />
+        <attr name="ptv_company_name" format="string" />
+    </declare-styleable>
+    <!--    一行信息，中间文字，左侧有个图标-->
+    <declare-styleable name="LineLeftIconView">
+        <attr name="lliv_icon" format="reference" />
+        <attr name="lliv_name" format="string" />
+        <attr name="lliv_height" format="dimension|reference" />
+    </declare-styleable>
+    <!--    白色背景的通用标题栏-->
+    <declare-styleable name="TitleWhiteLinearLayout">
+        <attr name="twll_icon" format="reference" />
+        <attr name="twll_name" format="string" />
+        <attr name="twll_edit" format="string" />
+    </declare-styleable>
+    <!--    一行信息，没有图标-->
+    <declare-styleable name="LineNoneIconView">
+        <attr name="lniv_icon" format="reference" />
+        <attr name="lniv_name" format="string" />
+        <attr name="lniv_text" format="string" />
+        <attr name="lniv_arrow" format="boolean" />
+
+    </declare-styleable>
+    <!--    一行文本信息-->
+    <declare-styleable name="LineTextView">
+        <attr name="ltv_text" format="string" />
+
+    </declare-styleable>
+    <!-- 带文字的密码输入框组件-->
+    <declare-styleable name="PwdTextEditView">
+        <attr name="ptev_name" format="string" />
+        <attr name="ptev_hint" format="string" />
+        <attr name="ptev_text" format="reference|string" />
+        <attr name="customContent" format="string"/>
+    </declare-styleable>
+    <!-- 带眼睛图标的密码输入框组件-->
+    <declare-styleable name="PasswordEyeEditView">
+        <attr name="peev_name" format="string" />
+        <attr name="peev_hint" format="string" />
+        <attr name="peev_text" format="reference|string" />
+    </declare-styleable>
+    <declare-styleable name="TitleUserIconView">
+        <attr name="tuiv_name" format="string" />
+    </declare-styleable>
+    <declare-styleable name="TitleImageView">
+        <attr name="tiv_name" format="string" />
+        <attr name="tiv_right_icon" format="integer|reference"/>
+    </declare-styleable>
+    <declare-styleable name="TitleLayoutView">
+        <attr name="tlv_name" format="string" />
+        <attr name="tlv_right" format="string" />
+    </declare-styleable>
+    <declare-styleable name="TitleLayoutTmView">
+        <attr name="tltv_name" format="string" />
+        <attr name="tltv_right" format="string" />
+    </declare-styleable>
+    <declare-styleable name="TitleSearchView">
+        <attr name="tsv_name" format="string" />
+    </declare-styleable>
+    <declare-styleable name="PasswordEyeCancelEditView">
+        <attr name="pecev_hint" format="string" />
+        <attr name="pecev_text" format="reference|string" />
+    </declare-styleable>
+    <!--    一行文字，两个textview组成，颜色不同-->
+    <declare-styleable name="WidgetTextMsg">
+        <attr name="wtm_left" format="string" />
+        <attr name="wtm_right" format="string" />
+        <attr name="wtm_textsize" format="dimension|reference" />
+        <attr name="wtm_right_color" format="color|reference" />
+        <attr name="wtm_left_color" format="color|reference" />
+        <attr name="wtm_bold" format="boolean" />
+    </declare-styleable>
+    <declare-styleable name="WidgetSubmitView">
+        <attr name="wsv_text" format="string"/>
+        <attr name="wsv_hascorner" format="boolean" />
+        <attr name="wsv_textsize" format="dimension|reference" />
+        <attr name="wsv_background" format="reference|color" />
+        <attr name="wsv_textcolor" format="reference|color" />
+    </declare-styleable>
+    <declare-styleable name="WidgetTabItemView">
+        <attr name="wtiv_check" format="boolean" />
+        <attr name="wtiv_name" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="WidgetTabLCRView">
+        <attr name="wtlv_check" format="boolean" />
+        <attr name="wtlv_type" format="string" />
+        <attr name="wtlv_name" format="string" />
+    </declare-styleable>
+<!--    ios开关-->
+    <declare-styleable name="OnOffView" >
+        <attr name="offColor" format="color"/>   <!--开关关闭时颜色-->
+        <attr name="onColor" format="color"/>    <!--打开时颜色-->
+        <attr name="backWith" format="dimension"/>    <!--可以不要~~-->
+        <attr name="iconSize" format="dimension"/>    <!--小图标大小-->
+        <attr name="paddingSize" format="dimension"/>    <!--间距-->
+        <attr name="defOff" format="boolean"/>      <!--默认状态-->
+    </declare-styleable>
+
+    <!-- 一行信息，有勾选图标-->
+    <declare-styleable name="LineCheckedIconView">
+        <attr name="lciv_name" format="string" />
+        <!--        显示图标-->
+        <attr name="lciv_icon" format="boolean" />
+
+    </declare-styleable>
+    <!-- 自定义带取消输入框-->
+    <declare-styleable name="CommonEditView">
+        <!--输入框的提示-->
+        <attr name="edittext_hint" format="string" />
+        <!--        背景色-->
+        <attr name="cev_back_color" format="color|reference" />
+        <!--        高度-->
+        <attr name="cev_height" format="dimension|reference" />
+    </declare-styleable>
+</resources>

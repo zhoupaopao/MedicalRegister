@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.medicalregister.viewmodel.ChooseWasteViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@mipmap/bg_enter">
+
+        <com.example.medicalregister.widget.TitleLayoutTmView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tltv_name="选择医废类型" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="108dp"
+            android:orientation="horizontal">
+
+            <View
+                android:layout_width="253dp"
+                android:layout_height="160dp"
+                android:background="@mipmap/icon_waste_infe"
+                android:onClick="@{v->viewModel.toWeight(0)}"/>
+
+            <View
+                android:layout_width="253dp"
+                android:layout_height="160dp"
+                android:layout_marginLeft="68dp"
+                android:background="@mipmap/icon_waste_inju"
+                android:onClick="@{v->viewModel.toWeight(1)}"/>
+
+            <View
+                android:layout_width="253dp"
+                android:layout_height="160dp"
+                android:layout_marginLeft="68dp"
+                android:background="@mipmap/icon_waste_chem"
+                android:onClick="@{v->viewModel.toWeight(2)}"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="42dp"
+            android:orientation="horizontal">
+
+            <View
+                android:layout_width="253dp"
+                android:layout_height="160dp"
+                android:background="@mipmap/icon_waste_path"
+                android:onClick="@{v->viewModel.toWeight(3)}"/>
+
+            <View
+                android:layout_width="253dp"
+                android:layout_height="160dp"
+                android:layout_marginLeft="68dp"
+                android:background="@mipmap/icon_waste_phar"
+                android:onClick="@{v->viewModel.toWeight(4)}"/>
+
+            <View
+                android:layout_width="253dp"
+                android:layout_height="160dp"
+                android:layout_marginLeft="68dp"
+                android:background="@mipmap/icon_waste_recy" />
+        </LinearLayout>
+    </LinearLayout>
+</layout>
