@@ -27,6 +27,7 @@ public class RegisterScanActivity extends BasePrintActivity<ActivityRegisterScan
     BlueWeight blueWeight = new BlueWeight(this);
     BluetoothAdapter mBluetoothAdapter;
     boolean isFirstIn=true;
+    //tijiao试试
 
 
     private void requestOpenBluetooth() {
