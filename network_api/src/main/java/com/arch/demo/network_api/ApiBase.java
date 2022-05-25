@@ -2,6 +2,7 @@ package com.arch.demo.network_api;
 
 import android.util.Log;
 
+import com.arch.demo.network_api.beans.LoginNetBean;
 import com.example.lib.base.BaseApplication;
 import com.example.lib.bean.TokenBean;
 import com.example.lib.utils.SharedPrefUtil;
@@ -162,6 +163,16 @@ public abstract class ApiBase {
             };
             TokenBean mBean = execute.body();//new Gson().fromJson(execute.body().toString(), TokenBean.class);
             SharedPrefUtil.putTokenBean(mBean);
+            //额外请求一下login接口
+            RequestBody requestBody = new FormBody.Builder()
+                    .add("openid", SharedPrefUtil.getOpenid())
+                    .build();
+            Call<LoginNetBean> categories1 = ApiBase.createApi(ApiInterface.class)
+                    .platformLogin(requestBody);
+            retrofit2.Response<LoginNetBean> execute1 = categories1.execute();
+            LoginNetBean loginNetBean=execute1.body();
+
+
             re_tok=mBean.getToken_type() + " " + mBean.getAccess_token();
         } catch (Exception e) {
             //退出登录

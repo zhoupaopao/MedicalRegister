@@ -1,6 +1,7 @@
 package com.arch.demo.network_api;
 
 
+import com.arch.demo.network_api.beans.LoginNetBean;
 import com.example.lib.bean.TokenBean;
 
 import java.util.ArrayList;
@@ -34,6 +35,9 @@ public interface ApiInterface {
 
     @POST("oauth/token?client_id=web&grant_type=numbers&scope=read")
     Call<TokenBean> tokenByNumber(@Query("number") String number);
+
+    @POST("platform/login")
+    Call<LoginNetBean> platformLogin(@Body RequestBody requestBody);
 
 
 }
