@@ -22,14 +22,24 @@ import com.example.medicalregister.activity.WeightRegisterActivity;
 import com.example.medicalregister.bean.DeviceUnit;
 import com.example.medicalregister.bean.EmployeesBean;
 import com.example.medicalregister.http.Api;
+import com.example.medicalregister.utils.MQTTHelper;
 import com.example.medicalregister.utils.PermissionUtils;
 import com.example.medicalregister.utils.StringUtil;
+import com.google.gson.Gson;
 import com.nlf.calendar.Lunar;
 
+import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
+import org.eclipse.paho.client.mqttv3.MqttCallback;
+import org.eclipse.paho.client.mqttv3.MqttMessage;
+
 import java.io.IOException;
+import java.util.Iterator;
 
 public class MainActivity extends Activity {
     Handler handler=new Handler();
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,11 +49,11 @@ public class MainActivity extends Activity {
 //        tokenBean.setToken_type("bearer");
 //        tokenBean.setAccess_token("a0f0537f-d11a-4ab3-a36a-ab25f3ea1903");
 //        SharedPrefUtil.putTokenBean(tokenBean);
-        SharedPrefUtil.putString(SharedPrefUtil.ip,"192.168.5.96");
+//        SharedPrefUtil.putString(SharedPrefUtil.ip,"192.168.5.171");
 //            SharedPrefUtil.putString(SharedPrefUtil.ip,"180.113.146.185");
-        SharedPrefUtil.putString(SharedPrefUtil.port,"9097");
-//            SharedPrefUtil.putString(SharedPrefUtil.ip,"114.115.204.108");
-//            SharedPrefUtil.putString(SharedPrefUtil.port,"8080");
+//        SharedPrefUtil.putString(SharedPrefUtil.port,"9097");
+            SharedPrefUtil.putString(SharedPrefUtil.ip,"114.115.204.108");
+            SharedPrefUtil.putString(SharedPrefUtil.port,"8080");
 
         PermissionUtils.medicalRegisterQx(new PermissionUtils.PermissionResult() {
             @Override
@@ -58,11 +68,11 @@ public class MainActivity extends Activity {
                     e.printStackTrace();
                 }
                 Log.i("DeviceId", deviceId);
-                if(!StringUtil.isEmpty(deviceId)&&SharedPrefUtil.getUserBean()!=null){
-                    startActivity(new Intent(MainActivity.this, HomeMainActivity.class));
-                }else{
+//                if(!StringUtil.isEmpty(deviceId)&&SharedPrefUtil.getUserBean()!=null){
+//                    startActivity(new Intent(MainActivity.this, HomeMainActivity.class));
+//                }else{
                     startActivity(new Intent(MainActivity.this, EnterEquipActivity.class));
-                }
+//                }
 //                startActivity(new Intent(MainActivity.this, EnterEquipActivity.class));
 //                startActivity(new Intent(MainActivity.this, LabelListActivity.class));
 //                Intent intent = new Intent(MainActivity.this, WeightRegisterActivity.class);
@@ -72,6 +82,7 @@ public class MainActivity extends Activity {
         });
 
         handler.postDelayed(runnable,0);
+
 //        try {
 //            PhoneInfoUtil.saveBitmap(this);
 //        } catch (IOException e) {

@@ -91,6 +91,41 @@ public class SharedPrefUtil {
         }
 
     }
+    //打印机状态
+    public static void putPrint_state(String print_state){
+        putString("Print_state",print_state);
+    }
+    public static String getPrint_state() {
+        return getString("Print_state").equals("")?"1":getString("Print_state");
+    }
+    //蓝牙模块
+    public static void putBlueWeight_State(String print_state){
+        Log.i("TAG", "putBlueWeight_State: "+print_state);
+        putString("BlueWeight_State",print_state);
+    }
+    public static String getBlueWeight_State() {
+        return getString("BlueWeight_State").equals("")?"1":getString("BlueWeight_State");
+    }
+    //发送间隔
+    public static void putInterval_State(String print_state){
+        putString("Interval_State",print_state);
+    }
+    public static String getInterval_State() {
+        return getString("Interval_State").equals("")?"60":getString("Interval_State");
+    }
+    //设备启用状态
+    public static void putD_state(String print_state){
+        putString("D_state",print_state);
+    }
+    public static String getD_state() {
+        return getString("D_state").equals("")?"1":getString("D_state");
+    }
+
+
+
+    //    public static String  = "1";//蓝牙模块状态
+//    public static String  = "60";//发送间隔
+//    public static String ="1";//设备禁用，启用0是禁用，1是启用
 
     public static void putToken(String token) {
         putString(USER_Token, token);

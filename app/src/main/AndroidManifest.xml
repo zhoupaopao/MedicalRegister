@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.medicalregister">
+    package="com.example.medicalregister"
+    android:sharedUserId="android.uid.system"
+    >
+<!--    android:sharedUserId="android.uid.system"-->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -14,6 +17,10 @@
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES"/>
+    <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" /> <!-- Required -->
+    <uses-permission android:name="android.permission.DEVICE_POWER" />
+
     <uses-feature
         android:name="android.hardware.bluetooth_le"
         android:required="true" />
@@ -67,6 +74,18 @@
 <!--                <action android:name="android.intent.action.BOOT_COMPLETED"></action>-->
 <!--            </intent-filter>-->
 <!--        </receiver>-->
+
+        <service android:name="org.eclipse.paho.android.service.MqttService"/>
+
+        <provider
+            android:name=".update.MyFileProvider"
+            android:authorities="${applicationId}.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
     </application>
 
 </manifest>

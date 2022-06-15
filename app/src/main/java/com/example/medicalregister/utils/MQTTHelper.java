@@ -3,6 +3,8 @@ package com.example.medicalregister.utils;
 import android.content.Context;
 import android.text.TextUtils;
 
+import com.example.lib.utils.PhoneInfoUtil;
+
 import org.eclipse.paho.android.service.MqttAndroidClient;
 import org.eclipse.paho.client.mqttv3.DisconnectedBufferOptions;
 import org.eclipse.paho.client.mqttv3.IMqttActionListener;
@@ -14,8 +16,8 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
 
 public class MQTTHelper {
 //    private static final String SERVER_URI = "tcp://10.18.70.102:1883";
-    private static final String SERVER_URI = "tcp://192.168.5.21:1883";
-    private static final String CLIENT_ID = "mqtt-zhou";
+    private static final String SERVER_URI = "tcp://120.76.53.41:1884";
+    private static final String CLIENT_ID = PhoneInfoUtil.getUUID();
 
     private static final String USER_NAME = "admin";
     private static final String PASSWORD = "admin";
@@ -75,6 +77,22 @@ public class MQTTHelper {
     private void subscribeToTopic() {
         try {
             mClient.subscribe(mTopic, 0, null, new IMqttActionListener() {
+                @Override
+                public void onSuccess(IMqttToken asyncActionToken) {
+                }
+
+                @Override
+                public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
+                }
+            });
+
+        } catch (MqttException ex) {
+            ex.printStackTrace();
+        }
+    }
+    public void subscribeToTopic(String topic) {
+        try {
+            mClient.subscribe(topic, 0, null, new IMqttActionListener() {
                 @Override
                 public void onSuccess(IMqttToken asyncActionToken) {
                 }

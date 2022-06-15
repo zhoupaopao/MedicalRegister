@@ -80,7 +80,7 @@ Observable<ArrayList<StationSlotDTO>> getAllStationSlots(@Path("stationNumber") 
     Observable<EmployeesBean> employees(@Path("num") String num);
 
 
-    @GET("label/updateVersions")
+    @GET("label/updateVersions/1")
     Observable<UpdateBean> update();
 
     //搜索危废类型列表

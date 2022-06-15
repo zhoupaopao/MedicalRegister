@@ -99,6 +99,9 @@ public class WeightRegisterActivity extends BasePrintActivity<ActivityWeightRegi
             @Override
             public void run() {
                 String tempWeight = BlueWeight.tempWeight;
+                if(!tempWeight.equals("0")){
+                    SharedPrefUtil.putBlueWeight_State("1");
+                }
                 runOnUiThread(() -> viewDataBinding.tvWeight.setText(tempWeight));
 //                Log.i("etweight", tempWeight+"");
             }
@@ -137,6 +140,7 @@ public class WeightRegisterActivity extends BasePrintActivity<ActivityWeightRegi
                     try {
                         blueWeight.connectBluetooth(WeightRegisterActivity.this, SharedPrefUtil.getString("blue_weight"), mBluetoothAdapter);
                     } catch (Exception e) {
+                        SharedPrefUtil.putBlueWeight_State("0");
                         //蓝牙异常
 //                        Toast.makeText(CollectWeasteAddListActivity.this,"蓝牙地磅连接异常",Toast.LENGTH_SHORT).show();
 //                        ll_blue.setVisibility(View.VISIBLE);
@@ -146,6 +150,7 @@ public class WeightRegisterActivity extends BasePrintActivity<ActivityWeightRegi
             }
         } else {
             Toast.makeText(mContext, "蓝牙模块初始化失败", Toast.LENGTH_SHORT).show();
+            SharedPrefUtil.putBlueWeight_State("0");
         }
 
     }

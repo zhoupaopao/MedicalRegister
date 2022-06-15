@@ -57,6 +57,12 @@ public class EnterEquipViewModel extends MvvmBaseViewModel {
     private EmployeesBean nowEmployeesBean;
     private String deviceNumber;
     private  DeviceUnit nowDeviceUnit;
+    private String downLoadUrl="";
+
+
+    public String getDownLoadUrl() {
+        return downLoadUrl;
+    }
 
     public DeviceUnit getNowDeviceUnit() {
         return nowDeviceUnit;
@@ -265,7 +271,7 @@ public class EnterEquipViewModel extends MvvmBaseViewModel {
             @Override
             protected void onHandleSuccess(UpdateBean updateBean) {
                 if (Utils.getAppVersionCode(getContext())<updateBean.getUpdateVersion()) {
-                    String downLoadUrl = updateBean.getAddress();
+                     downLoadUrl = updateBean.getAddress();
                     if (!TextUtils.isEmpty(downLoadUrl)) {
                         sendMessage("showAskPop");
                     }

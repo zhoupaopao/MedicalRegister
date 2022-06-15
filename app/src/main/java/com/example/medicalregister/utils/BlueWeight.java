@@ -143,6 +143,7 @@ public class BlueWeight {
             try {
                 tmpIn = socket.getInputStream();
             } catch (Exception e) {
+                SharedPrefUtil.putBlueWeight_State("0");
                 Log.e("zzz", "temp sockets not created", e);
             }
 

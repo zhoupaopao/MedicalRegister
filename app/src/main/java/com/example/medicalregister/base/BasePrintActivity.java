@@ -88,6 +88,7 @@ public abstract class BasePrintActivity<V extends ViewDataBinding, VM extends Mv
         }catch (Exception e){
             if(num>=maxNum){
                 Tips.show("打印机连接失败");
+                SharedPrefUtil.putPrint_state("0");
             }else{
                 num=num+1;
                 connectDevice(num);
@@ -222,6 +223,7 @@ public abstract class BasePrintActivity<V extends ViewDataBinding, VM extends Mv
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
+                    SharedPrefUtil.putPrint_state("1");
 //                    Toast.makeText(mContext, "Open Success", Toast.LENGTH_SHORT).show();
                 }
             });
@@ -235,6 +237,7 @@ public abstract class BasePrintActivity<V extends ViewDataBinding, VM extends Mv
                 public void run() {
                     if(SharedPrefUtil.getBoolean("needShowMsg",true)){
                         Toast.makeText(mContext, "Open Failed", Toast.LENGTH_SHORT).show();
+                        SharedPrefUtil.putPrint_state("0");
                     }
 
                 }
