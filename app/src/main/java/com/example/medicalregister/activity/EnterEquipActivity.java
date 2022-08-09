@@ -29,12 +29,14 @@ import com.example.lib.utils.SharedPrefUtil;
 import com.example.lib.utils.TimeUtil;
 import com.example.lib.utils.Tips;
 import com.example.lib.utils.Utils;
+import com.example.medicalregister.AppAplication;
 import com.example.medicalregister.BR;
 import com.example.medicalregister.R;
 import com.example.medicalregister.bean.MqttBean;
 import com.example.medicalregister.databinding.ActivityEnterEquipBinding;
 import com.example.medicalregister.update.DownloadManager;
 import com.example.medicalregister.utils.MQTTHelper;
+import com.example.medicalregister.utils.SoundPoolPlayer;
 import com.example.medicalregister.utils.StringUtil;
 import com.example.medicalregister.utils.WordUtils;
 import com.example.medicalregister.viewmodel.EnterEquipViewModel;
@@ -66,25 +68,18 @@ public class EnterEquipActivity extends BaseActivity<ActivityEnterEquipBinding, 
     @Override
     protected void initListener() {
         viewModel.update();
+        viewDataBinding.tvVersion.setText("版本号：V"+Utils.getAppVersionName(getContext()));
+
 //        showAskPop();
         viewDataBinding.tvEnter.setBackgroundResource(R.mipmap.icon_enter_button);
 //        viewDataBinding.tvTitle.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
-////                startActivity(new Intent(EnterEquipActivity.this, HomeMainActivity.class));
-////                finish();
-//                //手动休眠
-//                PowerManager pm=(PowerManager)getSystemService(Context.POWER_SERVICE);
-////                pm.goToSleep(SystemClock.uptimeMillis());
-//                try {
-//                    pm.getClass().getMethod("goToSleep", new Class[]{long.class}).invoke(pm, SystemClock.uptimeMillis());
-//                } catch (IllegalAccessException e) {
-//                    e.printStackTrace();
-//                } catch (InvocationTargetException e) {
-//                    e.printStackTrace();
-//                } catch (NoSuchMethodException e) {
-//                    e.printStackTrace();
-//                }
+//                AppAplication.getSound().playShortResource("登录成功");
+//                startActivity(new Intent(EnterEquipActivity.this, HomeMainActivity.class));
+//                finish();
+//
+//
 //            }
 //        });
         viewDataBinding.tvEnter.setOnClickListener(new View.OnClickListener() {
@@ -105,21 +100,28 @@ public class EnterEquipActivity extends BaseActivity<ActivityEnterEquipBinding, 
         viewModel.getNowStep().observe(this, new Observer<Integer>() {
             @Override
             public void onChanged(Integer integer) {
+                Log.i("TAG", "viewModel.getNowStep(): "+integer);
                 if (integer == 0) {
                     //需要进行卡验证
+                    viewDataBinding.tvTitleTop.setVisibility(View.GONE);
                     viewDataBinding.tvTitle.setText("录入设备");
                     viewDataBinding.llEnter.setVisibility(View.VISIBLE);
                     viewDataBinding.llScan.setVisibility(View.GONE);
                     viewDataBinding.llWarning.setVisibility(View.GONE);
                 } else if (integer == 1) {
-                    viewDataBinding.tvTitle.setText("扫描登录");
+                    AppAplication.getSound().playShortResource("请扫描护士工牌");
+                    viewDataBinding.tvTitle.setVisibility(View.GONE);
+                    viewDataBinding.tvTitleTop.setText("扫描登录");
+                    viewDataBinding.tvTitleTop.setVisibility(View.VISIBLE);
                     viewDataBinding.llEnter.setVisibility(View.GONE);
                     viewDataBinding.llScan.setVisibility(View.VISIBLE);
                     viewDataBinding.llWarning.setVisibility(View.GONE);
                     initMqtt();
                 } else if (integer == 2) {
                     viewDataBinding.tvSourceName.setText(viewModel.getNowDeviceUnit().getDepartmentName());
-                    viewDataBinding.tvTitle.setText("扫描登录");
+                    viewDataBinding.tvTitle.setVisibility(View.GONE);
+                    viewDataBinding.tvTitleTop.setText("扫描登录");
+                    viewDataBinding.tvTitleTop.setVisibility(View.VISIBLE);
                     viewDataBinding.llEnter.setVisibility(View.GONE);
                     viewDataBinding.llScan.setVisibility(View.GONE);
                     viewDataBinding.llWarning.setVisibility(View.VISIBLE);
@@ -128,7 +130,9 @@ public class EnterEquipActivity extends BaseActivity<ActivityEnterEquipBinding, 
                     //但是状态2只能停留2s，且不能扫描
                     handler.postDelayed(runnable, 2000);
                 }else if (integer == 3) {
-                    viewDataBinding.tvTitle.setText("系统提示");
+                    viewDataBinding.tvTitle.setVisibility(View.GONE);
+                    viewDataBinding.tvTitleTop.setText("系统提示");
+                    viewDataBinding.tvTitleTop.setVisibility(View.VISIBLE);
                     viewDataBinding.llEnter.setVisibility(View.GONE);
                     viewDataBinding.llScan.setVisibility(View.GONE);
                     viewDataBinding.llWarning.setVisibility(View.VISIBLE);
@@ -156,6 +160,7 @@ public class EnterEquipActivity extends BaseActivity<ActivityEnterEquipBinding, 
 //                Tips.show(message);
                 hideLoadingDialog();
             } else if (message.equals("toHomeMain")) {
+                AppAplication.getSound().playShortResource("登录成功");
                 Intent intent = new Intent(this, HomeMainActivity.class);
                 startActivity(intent);
                 finish();
@@ -167,99 +172,117 @@ public class EnterEquipActivity extends BaseActivity<ActivityEnterEquipBinding, 
     }
 
     private void initMqtt() {
-        mqttHelper = new MQTTHelper(this, WordUtils.topicGet+viewModel.getDeviceNumber(), new MqttCallback() {
-            @Override
-            public void connectionLost(Throwable cause) {
-//                setTextInfo("connectionLostException: " + cause.getMessage());
-            }
 
-            @Override
-            public void messageArrived(String topic, MqttMessage message) throws Exception {
-                Log.i("messageArrived: ", new String(message.getPayload()));
-                MqttBean mqttBean = new Gson().fromJson(new String(message.getPayload()), MqttBean.class);
-                if (mqttBean.getMethod().equals("medice_waste_Set")) {
-                    if (mqttBean.getParam().containsKey("Interval_State")) {
-                        //设置发送间隔
-                        SharedPrefUtil.putInterval_State(mqttBean.getParam().get("Interval_State"));
-                    }
-                    if (mqttBean.getParam().containsKey("D_state")) {
-                        //设置启用和禁用
-                        SharedPrefUtil.putD_state(mqttBean.getParam().get("D_state"));
-                        if(SharedPrefUtil.getD_state().equals("0")){
-                            //禁用
-                            //G关闭所有页面，重新打开这个页面
-                            if(isFinishing()){
-                                finishAllActivity();
-                                Intent intent=new Intent(EnterEquipActivity.this,EnterEquipActivity.class);
-                                startActivity(intent);
-                            }else{
-                                //没有关闭，直接设置
-                                viewModel.getNowStep().setValue(3);
-                            }
-
-
-                        }else{
-                            //启用
-                            viewModel.getNowStep().setValue(1);
-                        }
-                    }
-                            //设备休眠 0，唤醒 1
-                    if(mqttBean.getParam().containsKey("D_wakeup")){
-                        if(mqttBean.getParam().get("D_wakeup").equals("0")){
-
-                            PowerManager pm=(PowerManager)getSystemService(Context.POWER_SERVICE);
-                            if(pm.isScreenOn()){
-                                try {
-                                    pm.getClass().getMethod("goToSleep", new Class[]{long.class}).invoke(pm, SystemClock.uptimeMillis());
-                                } catch (IllegalAccessException e) {
-                                    e.printStackTrace();
-                                } catch (InvocationTargetException e) {
-                                    e.printStackTrace();
-                                } catch (NoSuchMethodException e) {
-                                    e.printStackTrace();
-                                }
-                                Log.d("sleep","屏幕状态1="+pm.isScreenOn());
-                            }
-//                pm.goToSleep(SystemClock.uptimeMillis());
-
-                        }else if(mqttBean.getParam().get("D_wakeup").equals("1")){
-                            //唤醒
-                            PowerManager pm = (PowerManager)getSystemService(Context.POWER_SERVICE);
-//                           @SuppressLint("InvalidWakeLockTag") PowerManager.WakeLock mWakeLock = pm.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK, "TEST");
-//                            mWakeLock.acquire();
-                            if(!pm.isScreenOn()){
-                                handler.postDelayed(new Runnable(){
-
-                                    public void run(){
-
-                                        Log.d("sleep", "sleep--");
-
-                                        @SuppressLint("InvalidWakeLockTag") PowerManager.WakeLock wakeLock = pm.newWakeLock(PowerManager.ACQUIRE_CAUSES_WAKEUP | PowerManager.SCREEN_DIM_WAKE_LOCK, "TAG");
-
-                                        wakeLock.acquire();
-
-                                        Log.d("sleep","屏幕状态2="+pm.isScreenOn());
-
-                                        wakeLock.release();
-
-                                    }
-
-                                }, 1*1000);
-                            }
-                        }
-                    }
-                }
-            }
-
-            @Override
-            public void deliveryComplete(IMqttDeliveryToken token) {
-//                setTextInfo("deliveryComplete");
-                Log.i("TAG", "deliveryComplete: ");
-            }
-        });
-        mqttHelper.doConnect();
+//        AppAplication.setMqttLinked(true);
        if(!WordUtils.isRunnable){
            WordUtils.isRunnable=true;
+           mqttHelper = new MQTTHelper(this, WordUtils.topicGet+viewModel.getDeviceNumber(), new MqttCallback() {
+               @Override
+               public void connectionLost(Throwable cause) {
+//                setTextInfo("connectionLostException: " + cause.getMessage());
+               }
+
+               @Override
+               public void messageArrived(String topic, MqttMessage message) throws Exception {
+                   Log.i("messageArrived: ", new String(message.getPayload()));
+                   try {
+                       MqttBean mqttBean = new Gson().fromJson(new String(message.getPayload()), MqttBean.class);
+                       if (mqttBean.getMethod().equals("medice_waste_Set")) {
+                           if (mqttBean.getParam().containsKey("Interval_State")) {
+                               //设置发送间隔
+                               SharedPrefUtil.putInterval_State(Long.valueOf(mqttBean.getParam().get("Interval_State")));
+                           }
+                           if (mqttBean.getParam().containsKey("D_state")) {
+                               //设置启用和禁用
+
+                               if(mqttBean.getParam().get("D_state").equals("0")){
+                                   SharedPrefUtil.putD_state(mqttBean.getParam().get("D_state"));
+                                   //禁用
+                                   //G关闭所有页面，重新打开这个页面
+                                   if(isFinishing()){
+                                       finishAllActivity();
+                                       mqttHelper.disconnect();
+                                       WordUtils.isRunnable=false;
+                                       Intent intent=new Intent(EnterEquipActivity.this,EnterEquipActivity.class);
+                                       startActivity(intent);
+                                   }else{
+                                       //没有关闭，直接设置
+                                       viewModel.getNowStep().setValue(3);
+                                   }
+
+
+                               }else if(mqttBean.getParam().get("D_state").equals("1")){
+                                   //启用
+                                   SharedPrefUtil.putD_state(mqttBean.getParam().get("D_state"));
+                                   viewModel.getNowStep().setValue(1);
+//                                   AppAplication.getSound().playShortResource("请扫描护士工牌");
+//                                   viewDataBinding.tvTitle.setVisibility(View.GONE);
+//                                   viewDataBinding.tvTitleTop.setText("扫描登录");
+//                                   viewDataBinding.tvTitleTop.setVisibility(View.VISIBLE);
+//                                   viewDataBinding.llEnter.setVisibility(View.GONE);
+//                                   viewDataBinding.llScan.setVisibility(View.VISIBLE);
+//                                   viewDataBinding.llWarning.setVisibility(View.GONE);
+                               }
+                           }
+                           //设备休眠 0，唤醒 1
+                           if(mqttBean.getParam().containsKey("D_wakeup")){
+                               if(mqttBean.getParam().get("D_wakeup").equals("0")){
+
+                                   PowerManager pm=(PowerManager)getSystemService(Context.POWER_SERVICE);
+                                   if(pm.isScreenOn()){
+                                       try {
+                                           pm.getClass().getMethod("goToSleep", new Class[]{long.class}).invoke(pm, SystemClock.uptimeMillis());
+                                       } catch (IllegalAccessException e) {
+                                           e.printStackTrace();
+                                       } catch (InvocationTargetException e) {
+                                           e.printStackTrace();
+                                       } catch (NoSuchMethodException e) {
+                                           e.printStackTrace();
+                                       }
+                                       Log.d("sleep","屏幕状态1="+pm.isScreenOn());
+                                   }
+//                pm.goToSleep(SystemClock.uptimeMillis());
+
+                               }else if(mqttBean.getParam().get("D_wakeup").equals("1")){
+                                   //唤醒
+                                   PowerManager pm = (PowerManager)getSystemService(Context.POWER_SERVICE);
+//                           @SuppressLint("InvalidWakeLockTag") PowerManager.WakeLock mWakeLock = pm.newWakeLock(PowerManager.SCREEN_BRIGHT_WAKE_LOCK, "TEST");
+//                            mWakeLock.acquire();
+                                   if(!pm.isScreenOn()){
+                                       handler.postDelayed(new Runnable(){
+
+                                           public void run(){
+
+                                               Log.d("sleep", "sleep--");
+
+                                               @SuppressLint("InvalidWakeLockTag") PowerManager.WakeLock wakeLock = pm.newWakeLock(PowerManager.ACQUIRE_CAUSES_WAKEUP | PowerManager.SCREEN_DIM_WAKE_LOCK, "TAG");
+
+                                               wakeLock.acquire();
+
+                                               Log.d("sleep","屏幕状态2="+pm.isScreenOn());
+
+                                               wakeLock.release();
+
+                                           }
+
+                                       }, 1*1000);
+                                   }
+                               }
+                           }
+                       }
+                   }catch (Exception e){
+                       Log.e("Exception", "异常MQTT消息");
+                   }
+
+               }
+
+               @Override
+               public void deliveryComplete(IMqttDeliveryToken token) {
+//                setTextInfo("deliveryComplete");
+                   Log.i("TAG", "deliveryComplete: ");
+               }
+           });
+           mqttHelper.doConnect();
            handler.postDelayed(runnableTopic, 1000);
        }
 
@@ -269,6 +292,7 @@ public class EnterEquipActivity extends BaseActivity<ActivityEnterEquipBinding, 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+//        sound.release();
     }
 
     //mqtt心跳
@@ -285,7 +309,7 @@ public class EnterEquipActivity extends BaseActivity<ActivityEnterEquipBinding, 
             Map<String, String> map = new HashMap<String, String>();
             map.put("Print_state", SharedPrefUtil.getPrint_state());
             map.put("BlueWeight_State", SharedPrefUtil.getBlueWeight_State());
-            map.put("Interval_State", SharedPrefUtil.getInterval_State());
+            map.put("Interval_State", SharedPrefUtil.getInterval_State()+"");
             map.put("D_state", SharedPrefUtil.getD_state());
             map.put("TIME", TimeUtil.getNowTimeNYRSFM());
             PowerManager pm = (PowerManager)getSystemService(Context.POWER_SERVICE);
@@ -299,7 +323,7 @@ public class EnterEquipActivity extends BaseActivity<ActivityEnterEquipBinding, 
             map.put("Version", "V" + Utils.getAppVersionName(getContext()));
             mqttBean.setParam(map);
             mqttHelper.publish(WordUtils.topicUpdate, new Gson().toJson(mqttBean));
-            handler.postDelayed(this, Long.parseLong(SharedPrefUtil.getInterval_State()) * 1000);
+            handler.postDelayed(this, SharedPrefUtil.getInterval_State() * 1000);
         }
     };
     Runnable runnableInstall = new Runnable() {
@@ -539,5 +563,6 @@ public class EnterEquipActivity extends BaseActivity<ActivityEnterEquipBinding, 
         }
         startActivity(intent);
     }
+
 
 }

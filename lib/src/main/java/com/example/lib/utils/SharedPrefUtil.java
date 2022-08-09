@@ -107,11 +107,11 @@ public class SharedPrefUtil {
         return getString("BlueWeight_State").equals("")?"1":getString("BlueWeight_State");
     }
     //发送间隔
-    public static void putInterval_State(String print_state){
-        putString("Interval_State",print_state);
+    public static void putInterval_State(Long interval_State){
+        putLong("Interval_State",interval_State);
     }
-    public static String getInterval_State() {
-        return getString("Interval_State").equals("")?"60":getString("Interval_State");
+    public static Long getInterval_State() {
+        return getLong("Interval_State",60)==60?60:getLong("Interval_State",60);
     }
     //设备启用状态
     public static void putD_state(String print_state){

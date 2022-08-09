@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.example.lib.base.BaseActivity;
 import com.example.lib.bean.TokenBean;
 import com.example.lib.utils.SharedPrefUtil;
+import com.example.medicalregister.AppAplication;
 import com.example.medicalregister.BR;
 import com.example.medicalregister.R;
 import com.example.medicalregister.adapter.LabelListAdapter;
@@ -26,6 +27,7 @@ public class LabelListActivity extends BasePrintActivity<ActivityLabelListBindin
     LabelListAdapter labelListAdapter;
     @Override
     protected void initListener() {
+         AppAplication.getSound().playShortResource("请选择您要补打的标签");
         labelListAdapter=new LabelListAdapter(this,viewModel.getmList());
         viewDataBinding.recyclerview.setLayoutManager(new LinearLayoutManager(this));
         viewDataBinding.recyclerview.setAdapter(labelListAdapter);

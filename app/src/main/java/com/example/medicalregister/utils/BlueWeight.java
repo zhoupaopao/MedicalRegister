@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.example.lib.base.BaseActivity;
 import com.example.lib.utils.SharedPrefUtil;
+import com.example.medicalregister.AppAplication;
 import com.example.medicalregister.base.BasePrintActivity;
 
 import java.io.IOException;
@@ -144,6 +145,7 @@ public class BlueWeight {
                 tmpIn = socket.getInputStream();
             } catch (Exception e) {
                 SharedPrefUtil.putBlueWeight_State("0");
+                AppAplication.getSound().playShortResource("蓝牙连接失败");
                 Log.e("zzz", "temp sockets not created", e);
             }
 
@@ -291,6 +293,7 @@ public class BlueWeight {
                                     reConnectNum=reConnectNum-1;
                                 }else{
                                     Toast.makeText(activity, "蓝牙地磅连接失败", Toast.LENGTH_SHORT).show();
+                                    AppAplication.getSound().playShortResource("蓝牙连接失败");
                                 }
 
 

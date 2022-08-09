@@ -12,6 +12,7 @@ import com.arch.demo.network_api.errorhandler.ExceptionHandle;
 import com.arch.demo.network_api.observer.BaseObserver;
 import com.example.lib.base.BaseActivity;
 import com.example.lib.utils.SharedPrefUtil;
+import com.example.medicalregister.AppAplication;
 import com.example.medicalregister.BR;
 import com.example.medicalregister.R;
 import com.example.medicalregister.base.BasePrintActivity;
@@ -31,10 +32,12 @@ import java.util.TimerTask;
 
 public class WeightRegisterActivity extends BasePrintActivity<ActivityWeightRegisterBinding, WeightRegisterViewModel> {
     BlueWeight blueWeight = new BlueWeight(this);
-
+    Boolean isFirstSound=true;
     @Override
     protected void initListener() {
         SharedPrefUtil.putBoolean("needShowMsg",true);
+
+        AppAplication.getSound().playShortResource("请进行称重");
         viewModel.setNowWasteInventoryBean((WasteInventoryBean) getIntent().getSerializableExtra("collectWasteBean"));
         viewDataBinding.tvRegisterMobile.setText(viewModel.getNowEmployeesBean().getMobile());
         viewDataBinding.tvRegisterName.setText(viewModel.getNowEmployeesBean().getName());
@@ -100,6 +103,11 @@ public class WeightRegisterActivity extends BasePrintActivity<ActivityWeightRegi
             public void run() {
                 String tempWeight = BlueWeight.tempWeight;
                 if(!tempWeight.equals("0")){
+                    if(isFirstSound){
+                        AppAplication.getSound().playShortResource("蓝牙连接成功");
+                        isFirstSound=false;
+                    }
+
                     SharedPrefUtil.putBlueWeight_State("1");
                 }
                 runOnUiThread(() -> viewDataBinding.tvWeight.setText(tempWeight));
@@ -141,6 +149,7 @@ public class WeightRegisterActivity extends BasePrintActivity<ActivityWeightRegi
                         blueWeight.connectBluetooth(WeightRegisterActivity.this, SharedPrefUtil.getString("blue_weight"), mBluetoothAdapter);
                     } catch (Exception e) {
                         SharedPrefUtil.putBlueWeight_State("0");
+                        AppAplication.getSound().playShortResource("蓝牙连接失败");
                         //蓝牙异常
 //                        Toast.makeText(CollectWeasteAddListActivity.this,"蓝牙地磅连接异常",Toast.LENGTH_SHORT).show();
 //                        ll_blue.setVisibility(View.VISIBLE);

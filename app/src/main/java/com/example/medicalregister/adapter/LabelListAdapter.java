@@ -52,7 +52,7 @@ public class LabelListAdapter extends RecyclerView.Adapter<LabelListAdapter.View
         }else{
             holder.ll_item.setBackgroundColor(context.getResources().getColor(R.color.color_421779D4));
         }
-        holder.tv_create_at.setText(TimeUtil.getFormatTimeFromTimestamp(Long.parseLong(labelBean.getCreatedAt()),"yyyy-MM-dd HH:MM:ss"));
+        holder.tv_create_at.setText(TimeUtil.formatAllTime(Long.parseLong(labelBean.getCreatedAt())));
         holder.tv_label_number.setText(labelBean.getNumber());
         holder.tv_weight.setText(labelBean.getData().getWeight()+"");
         holder.tv_waste_name.setText(labelBean.getData().getName());

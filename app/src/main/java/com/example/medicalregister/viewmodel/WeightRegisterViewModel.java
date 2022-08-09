@@ -8,6 +8,7 @@ import com.example.lib.base.MvvmBaseViewModel;
 import com.example.lib.utils.SharedPrefUtil;
 import com.example.lib.utils.TimeUtil;
 import com.example.lib.utils.Tips;
+import com.example.medicalregister.AppAplication;
 import com.example.medicalregister.bean.AcheveReturnLabelBean;
 import com.example.medicalregister.bean.AchieveLabelBean;
 import com.example.medicalregister.bean.ApiStringBean;
@@ -95,7 +96,8 @@ public class WeightRegisterViewModel extends MvvmBaseViewModel {
 
                 //执行打印
                 if(apiStringBean.getStatus()==201){
-                    Tips.show("登记完成");
+                    Tips.show("登记完成，请粘贴标签");
+                    AppAplication.getSound().playShortResource("登记完成，请粘贴标签");
                     //获取这个标签信息
                     getLabelBean(acheveReturnLabelBean.getLabel().getNumber());
 

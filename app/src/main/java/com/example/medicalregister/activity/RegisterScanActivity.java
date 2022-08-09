@@ -13,6 +13,7 @@ import androidx.lifecycle.Observer;
 import com.example.lib.base.BaseActivity;
 import com.example.lib.utils.ScanGunKeyEventHelper;
 import com.example.lib.utils.SharedPrefUtil;
+import com.example.medicalregister.AppAplication;
 import com.example.medicalregister.BR;
 import com.example.medicalregister.R;
 import com.example.medicalregister.base.BasePrintActivity;
@@ -83,20 +84,24 @@ public class RegisterScanActivity extends BasePrintActivity<ActivityRegisterScan
             public void onChanged(Integer integer) {
                 if(integer==0){
                     //代表扫描前
+                    AppAplication.getSound().playShortResource("请扫描护士工牌");
                     viewDataBinding.llWarning.setVisibility(View.GONE);
-                    viewDataBinding.llScan.setVisibility(View.VISIBLE);
                     viewDataBinding.llUnScan.setVisibility(View.VISIBLE);
+                    viewDataBinding.llHasScanSure.setVisibility(View.GONE);
                 }else if(integer==1){
                     //代表扫描错误
-                    viewDataBinding.llScan.setVisibility(View.GONE);
+                    viewDataBinding.llUnScan.setVisibility(View.GONE);
                     viewDataBinding.llWarning.setVisibility(View.VISIBLE);
+                    viewDataBinding.llHasScanSure.setVisibility(View.GONE);
                     EmployeesBean employeesBean=SharedPrefUtil.getObjectT(SharedPrefUtil.EMPLOYEE_Bean);
                     viewDataBinding.tvWarningSource.setText(employeesBean.getDepartment().getName());
                     handler.postDelayed(runnable,2000);
                 }else if(integer==2){
                     //扫描正确(0-2)
+                    AppAplication.getSound().playShortResource("请确认身份信息");
                     viewDataBinding.llUnScan.setVisibility(View.GONE);
-                    viewDataBinding.llHasScan.setVisibility(View.VISIBLE);
+//                    viewDataBinding.llHasScan.setVisibility(View.VISIBLE);
+                    viewDataBinding.llHasScanSure.setVisibility(View.VISIBLE);
                     EmployeesBean employeesBean=SharedPrefUtil.getObjectT(SharedPrefUtil.EMPLOYEE_Bean);
                     viewDataBinding.tvSourceName.setText(employeesBean.getDepartment().getName());
                     viewDataBinding.tvRegisterName.setText(employeesBean.getName());

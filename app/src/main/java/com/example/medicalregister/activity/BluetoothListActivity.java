@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.example.lib.base.BaseActivity;
 import com.example.lib.utils.SharedPrefUtil;
 import com.example.lib.utils.Tips;
+import com.example.medicalregister.AppAplication;
 import com.example.medicalregister.BR;
 import com.example.medicalregister.R;
 import com.example.medicalregister.adapter.BlueToothListAdapter;
@@ -130,6 +131,9 @@ public class BluetoothListActivity extends BaseActivity<ActivityBluetoothListBin
             } else if (BluetoothAdapter.ACTION_DISCOVERY_FINISHED.equals(action)) {
                 // 关闭进度条
 //                progressDialog.dismiss();
+                if(viewModel.getmList().size()==0){
+                    AppAplication.getSound().playShortResource("检测不到称重设备");
+                }
                 Log.e("TAG", "onReceive: 搜索完成");
             }
         }

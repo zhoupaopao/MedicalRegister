@@ -15,7 +15,7 @@ import java.util.Set;
  * 扫码枪事件解析类
  */
 public class ScanGunKeyEventHelper {
-    private final static long MESSAGE_DELAY = 50;//延迟500ms，判断扫码是否完成。
+    private final static long MESSAGE_DELAY = 500;//延迟500ms，判断扫码是否完成。
     private StringBuffer mStringBufferResult;//扫码内容
     private boolean mCaps;//大小写区分
     private final Handler mHandler;

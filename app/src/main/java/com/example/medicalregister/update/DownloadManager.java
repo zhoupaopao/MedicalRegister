@@ -85,9 +85,9 @@ public class DownloadManager {
         info.setSavePath(fileAbsolutePath);
         final DownloadInterceptor interceptor = new DownloadInterceptor(new MyDownloadProgressListener());
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
-        builder.connectTimeout(60, TimeUnit.SECONDS);
-        builder.readTimeout(60, TimeUnit.SECONDS);
-        builder.writeTimeout(60,TimeUnit.SECONDS);
+        builder.connectTimeout(600, TimeUnit.SECONDS);
+        builder.readTimeout(600, TimeUnit.SECONDS);
+        builder.writeTimeout(600,TimeUnit.SECONDS);
         builder.addInterceptor(interceptor);
 
         Retrofit retrofit = new Retrofit.Builder()

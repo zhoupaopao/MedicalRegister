@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="viewModel"
             type="com.example.medicalregister.viewmodel.RegisterScanViewModel" />
@@ -11,173 +12,175 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
+        android:background="@mipmap/bg_enter"
         android:gravity="center_horizontal"
-        android:background="@mipmap/bg_enter">
+        android:orientation="vertical">
 
         <com.example.medicalregister.widget.TitleLayoutTmView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:tltv_name="登记" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/white"
-            android:textSize="25sp"
-            android:layout_gravity="center_horizontal"
-            android:text="扫描护士工牌"
-            android:layout_marginTop="65dp"/>
-    <LinearLayout
-        android:id="@+id/ll_scan"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center_horizontal"
-        android:layout_marginTop="33dp"
-        android:visibility="visible"
-        android:orientation="vertical">
-        <RelativeLayout
-            android:layout_width="255dp"
-            android:layout_height="255dp"
-            android:orientation="horizontal"
-            android:layout_gravity="center_horizontal"
-            android:background="@mipmap/icon_scan_border"
-            android:padding="2dp"
-            >
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/color_CC000B22"/>
-            <ImageView
-                android:layout_width="252dp"
-                android:layout_height="48dp"
-                android:layout_marginTop="84dp"
-                android:src="@mipmap/icon_light_scan"/>
-        </RelativeLayout>
+            app:tltv_name="登记验证" />
+
         <LinearLayout
             android:id="@+id/ll_un_scan"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="110dp"
             android:gravity="center_horizontal"
-            android:visibility="gone"
-            android:orientation="vertical">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="请将员工工牌"
-            android:layout_marginTop="42dp"
-            android:textColor="@color/white"
-            android:textSize="20sp"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="对准扫描器进行识别"
-            android:textColor="@color/white"
-            android:textSize="20sp"/>
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="330dp"
+                android:layout_height="220dp"
+                android:src="@mipmap/icon_scan_demo" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:visibility="visible">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="72dp"
+                    android:text="请将员工工牌"
+                    android:textColor="@color/white"
+                    android:textSize="42sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="对准扫描器进行识别"
+                    android:textColor="@color/white"
+                    android:textSize="42sp" />
+            </LinearLayout>
+
         </LinearLayout>
+
         <LinearLayout
-            android:id="@+id/ll_has_scan"
+            android:id="@+id/ll_hasScanSure"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="110dp"
             android:gravity="center_horizontal"
-            android:visibility="gone"
+            android:visibility="visible"
             android:orientation="vertical">
-            <TextView
-                android:id="@+id/tv_source_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:layout_marginTop="25dp"
-                android:textColor="@color/white"
-                android:textSize="22sp"/>
-            <TextView
-                android:id="@+id/tv_register_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=""
-                android:textColor="@color/white"
-                android:layout_marginTop="25dp"
-                android:textSize="22sp"/>
-            <TextView
-                android:id="@+id/tv_choose"
-                android:layout_width="180dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="46dp"
-                android:text="选择医废类型"
-                android:textSize="22sp"
+
+            <LinearLayout
+                android:id="@+id/ll_hasScan"
+                android:layout_width="500dp"
+                android:layout_height="250dp"
+                android:background="@mipmap/icon_scan_border"
                 android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_source_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:textSize="42sp" />
+
+                <TextView
+                    android:id="@+id/tv_register_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="47dp"
+                    android:textColor="@color/white"
+                    android:textSize="42sp" />
+            </LinearLayout>
+            <TextView
+                android:id="@+id/tvChoose"
+                android:layout_width="230dp"
+                android:layout_height="75dp"
+                android:text="确  认"
                 android:textColor="@color/white"
-                />
+                android:textSize="34sp"
+                android:layout_marginTop="90dp"
+                android:gravity="center" />
         </LinearLayout>
-    </LinearLayout>
+
         <LinearLayout
             android:id="@+id/ll_warning"
             android:layout_width="692dp"
             android:layout_height="match_parent"
+            android:layout_marginTop="100dp"
             android:gravity="center_horizontal"
-            android:visibility="gone"
-            android:layout_marginTop="58dp"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="gone">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="348dp"
-                android:orientation="vertical"
+                android:background="@drawable/bg_42296cdd_corner8"
                 android:gravity="center_horizontal"
-                android:background="@drawable/bg_42296cdd_corner8">
+                android:orientation="vertical">
+
                 <ImageView
                     android:layout_width="84dp"
                     android:layout_height="74dp"
                     android:layout_marginTop="50dp"
-                    android:src="@mipmap/icon_warning"/>
+                    android:src="@mipmap/icon_warning" />
+
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="46dp"
                     android:orientation="horizontal">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="当前设备所属："
                         android:textColor="@color/white"
-                        android:textSize="22sp"/>
+                        android:textSize="22sp" />
+
                     <TextView
                         android:id="@+id/tv_warning_source"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text=""
-                        android:textSize="22sp"
-                        android:textColor="@color/color_69A5FF"/>
+                        android:textColor="@color/color_69A5FF"
+                        android:textSize="22sp" />
 
                 </LinearLayout>
+
                 <TextView
                     android:id="@+id/tv_equip_null"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="50dp"
                     android:text="该设备不在本科室"
                     android:textColor="@color/white"
                     android:textSize="22sp"
-                    android:visibility="gone"
-                    android:layout_marginTop="50dp"/>
+                    android:visibility="gone" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp"
                     android:text="当前工牌人员非登录人员，"
                     android:textColor="@color/white"
-                    android:textSize="22sp"
-                    android:layout_marginTop="40dp"/>
+                    android:textSize="22sp" />
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="请与登录人员保持一致"
                     android:textColor="@color/white"
-                    android:textSize="22sp"/>
+                    android:textSize="22sp" />
             </LinearLayout>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:textSize="20sp"
                 android:layout_marginTop="35dp"
-                android:text="即将重新登记验证"/>
+                android:text="即将重新登记验证"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
         </LinearLayout>
     </LinearLayout>
 </layout>

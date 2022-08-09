@@ -6,6 +6,7 @@ import androidx.lifecycle.Observer;
 
 import com.example.lib.base.BaseActivity;
 import com.example.lib.utils.SharedPrefUtil;
+import com.example.medicalregister.AppAplication;
 import com.example.medicalregister.BR;
 import com.example.medicalregister.R;
 import com.example.medicalregister.bean.EmployeesBean;
@@ -15,6 +16,7 @@ import com.example.medicalregister.viewmodel.ChooseWasteViewModel;
 public class ChooseWasteActivity extends BaseActivity<ActivityChooseWasteBinding, ChooseWasteViewModel> {
     @Override
     protected void initListener() {
+         AppAplication.getSound().playShortResource("请选择医废类型");
         viewModel.getWasteProduceRecord();
         //添加registerMessageEvent后使用方式,推荐
         viewModel.getMessageEvent().observe(this, (Observer<? super String>) message -> {

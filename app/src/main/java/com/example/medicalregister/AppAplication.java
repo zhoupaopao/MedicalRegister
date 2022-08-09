@@ -5,6 +5,7 @@ import android.content.Context;
 import com.arch.demo.network_api.ApiBase;
 import com.example.lib.base.BaseApplication;
 import com.example.medicalregister.http.NetworkRequestInfo;
+import com.example.medicalregister.utils.SoundPoolPlayer;
 import com.scwang.smart.refresh.footer.ClassicsFooter;
 import com.scwang.smart.refresh.header.ClassicsHeader;
 import com.scwang.smart.refresh.layout.SmartRefreshLayout;
@@ -25,7 +26,8 @@ import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
 public class AppAplication  extends BaseApplication {//extends BaseApplication
-
+    private static SoundPoolPlayer sound;
+//    private boolean MqttLinked=false;
     //static 代码段可以防止内存泄露
     static {
         //设置全局的Header构建器
@@ -52,7 +54,21 @@ public class AppAplication  extends BaseApplication {//extends BaseApplication
         super.onCreate();
         ApiBase.setNetworkRequestInfo(new NetworkRequestInfo());
         ignoreSSLHandshake();
+        sound = new SoundPoolPlayer(getAppContext());
     }
+
+//    public boolean isMqttLinked() {
+//        return MqttLinked;
+//    }
+//
+//    public static void setMqttLinked(boolean mqttLinked) {
+//        MqttLinked = mqttLinked;
+//    }
+
+    public static SoundPoolPlayer getSound() {
+        return sound;
+    }
+
     public static void ignoreSSLHandshake() {
         try {
             TrustManager[] trustAllCerts = new TrustManager[]{new X509TrustManager() {
