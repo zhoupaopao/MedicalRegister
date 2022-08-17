@@ -88,6 +88,7 @@ public class WeightRegisterViewModel extends MvvmBaseViewModel {
         ArrayList<SelectedRegistBean.ChildRegistBean>childRegistBeans=new ArrayList<>();
         childRegistBeans.add(childRegistBean);
         selectedRegistBean.setDetails(childRegistBeans);
+        selectedRegistBean.setCreatedBy(nowEmployeesBean.getName());
         mList.add(selectedRegistBean);
         RequestBody requestBody=RequestBody.create(MediaType.parse("application/json"), new Gson().toJson(mList));
         Api.getInstance().batchSave(requestBody, new BaseObserver<ApiStringBean>() {

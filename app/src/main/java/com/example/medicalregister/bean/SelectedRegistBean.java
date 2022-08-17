@@ -34,7 +34,7 @@ private String source;
     private String uow;
     private int quantity;
     private long createdAt;
-//    private String createdBy;
+    private String createdBy;
     private weasteBean waste;
     private List<ChildRegistBean> details;
     private String lot;
@@ -75,6 +75,8 @@ private String source;
 //                return new weasteBean[size];
 //            }
 //        };
+
+
 
 
         public double getWeight() {
@@ -342,7 +344,13 @@ private String source;
         this.maxQuantity = maxQuantity;
     }
 
+    public String getCreatedBy() {
+        return createdBy;
+    }
 
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+    }
 
     public String getSource() {
         return source;

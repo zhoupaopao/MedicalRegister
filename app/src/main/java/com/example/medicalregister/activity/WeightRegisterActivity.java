@@ -22,6 +22,7 @@ import com.example.medicalregister.bean.LabelBean;
 import com.example.medicalregister.bean.WasteInventoryBean;
 import com.example.medicalregister.databinding.ActivityWeightRegisterBinding;
 import com.example.medicalregister.http.Api;
+import com.example.medicalregister.intface.UnDoubleClickListener;
 import com.example.medicalregister.utils.BlueWeight;
 import com.example.medicalregister.viewmodel.WeightRegisterViewModel;
 import com.sun.jna.Pointer;
@@ -45,9 +46,15 @@ public class WeightRegisterActivity extends BasePrintActivity<ActivityWeightRegi
         viewDataBinding.tvWasteName.setText(viewModel.getNowWasteInventoryBean().getWaste().getName());
         viewDataBinding.tvSubmit.setBackgroundResource(R.mipmap.icon_enter_button1);
 
-        viewDataBinding.tvSubmit.setOnClickListener(new View.OnClickListener() {
+//        viewDataBinding.tvSubmit.setOnClickListener(new UnDoubleClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//            }
+//        });
+        viewDataBinding.tvSubmit.setOnClickListener(new UnDoubleClickListener() {
             @Override
-            public void onClick(View view) {
+            protected void onNoDoubleClick(View v) {
                 //先获取标签，然后提交登记，最后打印
                 viewModel.achieveLabel(viewDataBinding.tvWeight.getText().toString().trim());
             }
