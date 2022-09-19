@@ -139,6 +139,8 @@ dependencies {
     implementation 'org.apache.activemq:activemq-client:5.16.3'
     implementation 'javax.transaction:jta:1.1'
 
+    implementation 'com.github.licheedev:Android-SerialPort-API:2.0.0'
+
 //    implementation 'org.apache.logging.log4j:log4j-api:2.14.0'
 //    implementation 'org.apache.logging.log4j:log4j-core:2.14.0'
 }

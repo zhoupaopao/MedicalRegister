@@ -1,6 +1,9 @@
-package com.aill.serialportdemo;
+package com.example.medicalregister.serialport;
 
+import android.serialport.SerialPort;
 import android.util.Log;
+
+
 
 import java.io.BufferedInputStream;
 import java.io.File;

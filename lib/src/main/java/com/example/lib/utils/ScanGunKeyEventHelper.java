@@ -22,10 +22,10 @@ public class ScanGunKeyEventHelper {
     private final BluetoothAdapter mBluetoothAdapter;
     private final Runnable mScanningFishedRunnable;
     private OnScanSuccessListener mOnScanSuccessListener;
-    private String mDeviceName="HID 0581:0106";
+    private String mDeviceName = "HID 0581:0106";
 
     public ScanGunKeyEventHelper(OnScanSuccessListener onScanSuccessListener) {
-        mOnScanSuccessListener = onScanSuccessListener ;
+        mOnScanSuccessListener = onScanSuccessListener;
         //获取系统蓝牙适配器管理类
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 //        BluetoothDevice printerdevice = mBluetoothAdapter.getRemoteDevice("ssss");
@@ -49,21 +49,22 @@ public class ScanGunKeyEventHelper {
             mOnScanSuccessListener.onScanSuccess(barcode);
         mStringBufferResult.setLength(0);
     }
+
     /**
      * 将keyCode转为char
      *
-     * @param caps    是不是大写
      * @param keyCode 按键
      * @return 按键对应的char
      */
-    private char getInputCode(boolean caps, int keyCode) {
+    private char getInputCode(int keyCode) {
         if (keyCode >= KeyEvent.KEYCODE_A && keyCode <= KeyEvent.KEYCODE_Z) {
-            return (char) ((caps ? 'A' : 'a') + keyCode - KeyEvent.KEYCODE_A);
+            return (char) ((mCaps ? 'A' : 'a') + keyCode - KeyEvent.KEYCODE_A);
         } else {
 //            return keyValue(caps, keyCode);
-            return keyValue(false, keyCode);
+            return keyValue(mCaps, keyCode);
         }
     }
+
     /**
      * 按键对应的char表
      */
@@ -90,11 +91,11 @@ public class ScanGunKeyEventHelper {
             case KeyEvent.KEYCODE_9:
                 return caps ? '(' : '9';
             case KeyEvent.KEYCODE_NUMPAD_SUBTRACT:
-                return '-';
+                return caps ? '_' : '-';
 //            case KeyEvent.KEYCODE_MINUS:
 //                return '_';
             case KeyEvent.KEYCODE_MINUS:
-                return '-';
+                return caps ? '_' : '-';
             case KeyEvent.KEYCODE_EQUALS:
                 return '=';
             case KeyEvent.KEYCODE_NUMPAD_ADD:
@@ -123,31 +124,35 @@ public class ScanGunKeyEventHelper {
                 return 0;
         }
     }
+
     /**
      * 扫码枪事件解析
+     *
      * @param event
      */
     public void analysisKeyEvent(KeyEvent event) {
         int keyCode = event.getKeyCode();
         //字母大小写判断
-        checkLetterStatus(event);
-        if (event.getAction() == KeyEvent.ACTION_DOWN) {
+        if (keyCode == KeyEvent.KEYCODE_SHIFT_RIGHT || keyCode == KeyEvent.KEYCODE_SHIFT_LEFT) {
+            checkLetterStatus(event);
+        } else {
+            if (event.getAction() == KeyEvent.ACTION_DOWN) {
+                char aChar = getInputCode(event.getKeyCode());
+                mCaps=false;
+                if (aChar != 0) {
+                    mStringBufferResult.append(aChar);
+                }
+                if (keyCode == KeyEvent.KEYCODE_ENTER) {
+                    //若为回车键，直接返回
+                    mHandler.removeCallbacks(mScanningFishedRunnable);
+                    mHandler.post(mScanningFishedRunnable);
+                } else {
+                    //延迟post，若500ms内，有其他事件
+                    mHandler.removeCallbacks(mScanningFishedRunnable);
+                    mHandler.postDelayed(mScanningFishedRunnable, MESSAGE_DELAY);
+                }
 
-//            char aChar = getInputCode(mCaps, event.getKeyCode());
-            char aChar = getInputCode(true, event.getKeyCode());
-            if (aChar != 0) {
-                mStringBufferResult.append(aChar);
             }
-            if (keyCode == KeyEvent.KEYCODE_ENTER) {
-                //若为回车键，直接返回
-                mHandler.removeCallbacks(mScanningFishedRunnable);
-                mHandler.post(mScanningFishedRunnable);
-            } else {
-                //延迟post，若500ms内，有其他事件
-                mHandler.removeCallbacks(mScanningFishedRunnable);
-                mHandler.postDelayed(mScanningFishedRunnable, MESSAGE_DELAY);
-            }
-
         }
     }
 
@@ -166,6 +171,7 @@ public class ScanGunKeyEventHelper {
             }
         }
     }
+
     //获取扫描内容
     private char getInputCode(KeyEvent event) {
         int keyCode = event.getKeyCode();
@@ -212,8 +218,10 @@ public class ScanGunKeyEventHelper {
 //        Configuration cfg = getResources().getConfiguration();
 //        return cfg.keyboard != Configuration.KEYBOARD_NOKEYS;
 //    }
+
     /**
      * 扫描枪是否连接
+     *
      * @return
      */
     public boolean hasScanGun() {
@@ -235,8 +243,10 @@ public class ScanGunKeyEventHelper {
         }
         return false;
     }
+
     /**
      * 输入设备是否存在
+     *
      * @param deviceName
      * @return
      */
@@ -250,15 +260,17 @@ public class ScanGunKeyEventHelper {
         }
         return false;
     }
+
     /**
      * 是否为扫码枪事件(部分机型KeyEvent获取的名字错误)
+     *
      * @param event
      * @return
      */
     @Deprecated
-    public  boolean isScanGunEvent(KeyEvent event) {
+    public boolean isScanGunEvent(KeyEvent event) {
 //        String ddname=event.getDevice().getName();
-        mDeviceName=event.getDevice().getName();
+        mDeviceName = event.getDevice().getName();
         Log.i("isScanGunEvent: ", mDeviceName);
         return event.getDevice().getName().equals(mDeviceName);
     }
@@ -269,11 +281,11 @@ public class ScanGunKeyEventHelper {
      */
     public int checkBluetoothValid() {
 
-        if(mBluetoothAdapter == null) {//你的设备不具备蓝牙功能!
+        if (mBluetoothAdapter == null) {//你的设备不具备蓝牙功能!
             return 1;
         }
 
-        if(!mBluetoothAdapter.isEnabled()) {//蓝牙设备未打开,请开启此功能后重试!
+        if (!mBluetoothAdapter.isEnabled()) {//蓝牙设备未打开,请开启此功能后重试!
             return 2;
         }
         return 3;//蓝牙正常工作

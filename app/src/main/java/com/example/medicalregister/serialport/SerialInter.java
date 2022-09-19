@@ -1,4 +1,4 @@
-package com.aill.serialportdemo;
+package com.example.medicalregister.serialport;
 
 
 /**

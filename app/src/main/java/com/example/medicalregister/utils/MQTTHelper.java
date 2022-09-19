@@ -15,7 +15,6 @@ import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 
 public class MQTTHelper {
-//    private static final String SERVER_URI = "tcp://10.18.70.102:1883";
     private static final String SERVER_URI = "tcp://120.76.53.41:1884";
     private static final String CLIENT_ID = PhoneInfoUtil.getUUID();
 
