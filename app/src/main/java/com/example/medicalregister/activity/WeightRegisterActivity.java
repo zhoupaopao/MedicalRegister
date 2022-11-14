@@ -104,6 +104,7 @@ public class WeightRegisterActivity extends BasePrintActivity<ActivityWeightRegi
 
     @Override
     protected void initData() {
+        //重量可以使用暂存终端的方式（读到string后截取字符串，再解析backservice里面的内容）
         final Timer[] timer = {new Timer()};
         timer[0].schedule(new TimerTask() {
             @Override
