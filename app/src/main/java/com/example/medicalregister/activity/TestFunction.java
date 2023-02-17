@@ -574,21 +574,21 @@ class TestFunction {
         AutoReplyPrint.INSTANCE.CP_Pos_SetMultiByteMode(h);
         AutoReplyPrint.INSTANCE.CP_Pos_SetMultiByteEncoding(h, AutoReplyPrint.CP_MultiByteEncoding_UTF8);
         AutoReplyPrint.INSTANCE.CP_Label_PageBegin(h, 0, 140, 380, 500, AutoReplyPrint.CP_Label_Rotation_0);
-        AutoReplyPrint.INSTANCE.CP_Label_DrawBox(h, 0, 20, 360, 470, 2, AutoReplyPrint.CP_Label_Color_Black);
+        AutoReplyPrint.INSTANCE.CP_Label_DrawBox(h, 0, 40, 360, 450, 2, AutoReplyPrint.CP_Label_Color_Black);
         //画每一行的线（三条长横线）
-        AutoReplyPrint.INSTANCE.CP_Label_DrawLine(h, 260, 20, 260, 490, 1, AutoReplyPrint.CP_Label_Color_Black);
-        AutoReplyPrint.INSTANCE.CP_Label_DrawLine(h, 205, 20, 205, 490, 1, AutoReplyPrint.CP_Label_Color_Black);
-        AutoReplyPrint.INSTANCE.CP_Label_DrawLine(h, 150, 20, 150, 490, 1, AutoReplyPrint.CP_Label_Color_Black);
+        AutoReplyPrint.INSTANCE.CP_Label_DrawLine(h, 260, 40, 260, 490, 1, AutoReplyPrint.CP_Label_Color_Black);
+        AutoReplyPrint.INSTANCE.CP_Label_DrawLine(h, 205, 40, 205, 490, 1, AutoReplyPrint.CP_Label_Color_Black);
+        AutoReplyPrint.INSTANCE.CP_Label_DrawLine(h, 150, 40, 150, 490, 1, AutoReplyPrint.CP_Label_Color_Black);
         //二维码旁边的短横线
-        AutoReplyPrint.INSTANCE.CP_Label_DrawLine(h, 100, 170, 100, 490, 1, AutoReplyPrint.CP_Label_Color_Black);
-        AutoReplyPrint.INSTANCE.CP_Label_DrawLine(h, 50, 170, 50, 490, 1, AutoReplyPrint.CP_Label_Color_Black);
+        AutoReplyPrint.INSTANCE.CP_Label_DrawLine(h, 100, 180, 100, 490, 1, AutoReplyPrint.CP_Label_Color_Black);
+        AutoReplyPrint.INSTANCE.CP_Label_DrawLine(h, 50, 180, 50, 490, 1, AutoReplyPrint.CP_Label_Color_Black);
         //二维码旁的竖线
-        AutoReplyPrint.INSTANCE.CP_Label_DrawLine(h, 0, 170, 150, 170, 1, AutoReplyPrint.CP_Label_Color_Black);
+        AutoReplyPrint.INSTANCE.CP_Label_DrawLine(h, 0, 180, 150, 180, 1, AutoReplyPrint.CP_Label_Color_Black);
         //医废类型和科室中间的竖线
-        AutoReplyPrint.INSTANCE.CP_Label_DrawLine(h, 150, 265,
-                205, 265, 1, AutoReplyPrint.CP_Label_Color_Black);
+        AutoReplyPrint.INSTANCE.CP_Label_DrawLine(h, 150, 285,
+                205, 285, 1, AutoReplyPrint.CP_Label_Color_Black);
         //在框里放二维码
-        AutoReplyPrint.INSTANCE.CP_Label_DrawQRCode(h, 137, 33, 0, AutoReplyPrint.CP_QRCodeECC_L, 6, AutoReplyPrint.CP_Label_Rotation_90, labelBean.getNumber());
+        AutoReplyPrint.INSTANCE.CP_Label_DrawQRCode(h, 137, 48, 0, AutoReplyPrint.CP_QRCodeECC_L, 6, AutoReplyPrint.CP_Label_Rotation_90, labelBean.getNumber());
 
         //下面开始是文字
         String wasteName=labelBean.getData().getName();
@@ -602,28 +602,28 @@ class TestFunction {
 //                AutoReplyPrint.CP_Label_Rotation_270, 1, 1).getStyle(), "Infectious Waste");
 
         //第二行，医院信息
-        AutoReplyPrint.INSTANCE.CP_Label_DrawText(h, 245, 22, 25,
+        AutoReplyPrint.INSTANCE.CP_Label_DrawText(h, 245, 42, 25,
                 new AutoReplyPrint.CP_Label_TextStyle(false, false, false, false,
                         AutoReplyPrint.CP_Label_Rotation_90, 1, 1).getStyle(), "医院:"+labelBean.getData().getOrganization());
         //第三行，医废类型、科室
-        AutoReplyPrint.INSTANCE.CP_Label_DrawText(h, 190, 22, 25,
+        AutoReplyPrint.INSTANCE.CP_Label_DrawText(h, 190, 42, 25,
                 new AutoReplyPrint.CP_Label_TextStyle(false, false, false, false,
                         AutoReplyPrint.CP_Label_Rotation_90, 1, 1).getStyle(), "医废种类:"+labelBean.getData().getName());
-        AutoReplyPrint.INSTANCE.CP_Label_DrawText(h, 190, 270, 25,
+        AutoReplyPrint.INSTANCE.CP_Label_DrawText(h, 190, 290, 25,
                 new AutoReplyPrint.CP_Label_TextStyle(false, false, false, false,
                         AutoReplyPrint.CP_Label_Rotation_90, 1, 1).getStyle(), "科室:"+labelBean.getData().getDepartment());
         //第四行，重量、收集人
-        AutoReplyPrint.INSTANCE.CP_Label_DrawText(h, 135, 172, 22,
+        AutoReplyPrint.INSTANCE.CP_Label_DrawText(h, 135, 182, 20,
                 new AutoReplyPrint.CP_Label_TextStyle(false, false, false, false,
                         AutoReplyPrint.CP_Label_Rotation_90, 1, 1).getStyle(), "重量(KG):"+labelBean.getData().getWeight());
-        AutoReplyPrint.INSTANCE.CP_Label_DrawText(h, 135, 345, 22,
+        AutoReplyPrint.INSTANCE.CP_Label_DrawText(h, 135, 345, 20,
                 new AutoReplyPrint.CP_Label_TextStyle(false, false, false, false,
                         AutoReplyPrint.CP_Label_Rotation_90, 1, 1).getStyle(), "收集人:"+labelBean.getData().getCollector());
         //第五行，日期、交接人
-        AutoReplyPrint.INSTANCE.CP_Label_DrawText(h, 85, 172, 22,
+        AutoReplyPrint.INSTANCE.CP_Label_DrawText(h, 85, 182, 20,
                 new AutoReplyPrint.CP_Label_TextStyle(false, false, false, false,
                         AutoReplyPrint.CP_Label_Rotation_90, 1, 1).getStyle(), "日期:"+ TimeUtil.getFormatTimeFromTimestamp(Long.parseLong(labelBean.getCreatedAt()),"yyyy-MM-dd"));
-        AutoReplyPrint.INSTANCE.CP_Label_DrawText(h, 85, 345, 22,
+        AutoReplyPrint.INSTANCE.CP_Label_DrawText(h, 85, 345, 20,
                 new AutoReplyPrint.CP_Label_TextStyle(false, false, false, false,
                         AutoReplyPrint.CP_Label_Rotation_90, 1, 1).getStyle(), "交接人:"+labelBean.getData().getCollector());
         AutoReplyPrint.INSTANCE.CP_Label_DrawText(h, 40, 190, 25,

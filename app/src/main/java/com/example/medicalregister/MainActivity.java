@@ -50,13 +50,13 @@ public class MainActivity extends Activity {
 //        tokenBean.setAccess_token("a0f0537f-d11a-4ab3-a36a-ab25f3ea1903");
 //        SharedPrefUtil.putTokenBean(tokenBean);
 
-//        SharedPrefUtil.putString(SharedPrefUtil.ip,"114.116.13.190");//线上测试地址
-//        SharedPrefUtil.putString(SharedPrefUtil.ip,"192.168.5.189");
+        SharedPrefUtil.putString(SharedPrefUtil.ip,"114.116.13.190");//线上测试地址
+//        SharedPrefUtil.putString(SharedPrefUtil.ip,"192.168.5.190");
 //            SharedPrefUtil.putString(SharedPrefUtil.ip,"180.113.146.185");
-//        SharedPrefUtil.putString(SharedPrefUtil.port,"9097");
-            SharedPrefUtil.putString(SharedPrefUtil.ip,"114.115.204.108");
+        SharedPrefUtil.putString(SharedPrefUtil.port,"8080");
+//            SharedPrefUtil.putString(SharedPrefUtil.ip,"114.115.204.108");
 //        SharedPrefUtil.putString(SharedPrefUtil.ip,"114.115.204.108");
-            SharedPrefUtil.putString(SharedPrefUtil.port,"8080");
+//            SharedPrefUtil.putString(SharedPrefUtil.port,"8080");
 
         PermissionUtils.medicalRegisterQx(new PermissionUtils.PermissionResult() {
             @Override
